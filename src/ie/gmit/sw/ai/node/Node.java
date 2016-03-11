@@ -1,5 +1,6 @@
 package ie.gmit.sw.ai.node;
 
+import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,6 +10,7 @@ public class Node {
 	private NodeType type;
 	private boolean visited;
 	
+	private Color color = Color.BLACK;
 	private int row = -1;
 	private int col = -1;
 	
@@ -55,6 +57,14 @@ public class Node {
 	}
 	public void setVisited(boolean visited) {
 		this.visited = visited;
+	}
+	
+	public Color getColor() {
+		return color;
+	}
+
+	public void setColor(Color color) {
+		this.color = color;
 	}
 	
 	public String toString() {

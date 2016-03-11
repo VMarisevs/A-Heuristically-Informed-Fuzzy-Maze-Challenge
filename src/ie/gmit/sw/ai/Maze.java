@@ -23,12 +23,15 @@ public class Maze {
 					maze[row][col].setPassage(NodePassage.West);
 				}else{
 					maze[row][col].setPassage(NodePassage.North);
-					
 				}
 			}
 		}
 	}
 	
+	public Node[][] getMaze(){
+		return maze;
+	}
+
 	public String toString(){
 		StringBuffer sb = new StringBuffer();
 		for (int row = 0; row < maze.length; row++){
