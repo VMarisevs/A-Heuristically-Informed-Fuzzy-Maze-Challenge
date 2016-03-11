@@ -3,6 +3,7 @@ package ie.gmit.sw.ai.node;
 import java.util.ArrayList;
 import java.util.List;
 
+
 public class Node {
 	private NodePassage passage;
 	private NodeType type;
@@ -56,5 +57,12 @@ public class Node {
 		this.visited = visited;
 	}
 	
+	public String toString() {
+		if (passage == NodePassage.North){
+			return "N ";
+		}else{
+			return "W ";
+		}
+	}
 	
 }
