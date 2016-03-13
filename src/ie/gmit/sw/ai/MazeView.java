@@ -11,6 +11,7 @@ import javax.swing.JPanel;
 
 import ie.gmit.sw.ai.node.Node;
 import ie.gmit.sw.ai.node.NodePassage;
+import ie.gmit.sw.ai.node.NodeType;
 
 public class MazeView extends JPanel {
 	private static final long serialVersionUID = 1L;
@@ -37,6 +38,10 @@ public class MazeView extends JPanel {
         		int x2 = (col + 1) * size;
         		int y2 = (row + 1) * size;
         		
+        		// painting square with color
+        		g2.setColor(maze[row][col].getColor());
+   				g2.fillRect(x1, y1, size, size);
+        		   				
         		g2.setColor(Color.RED);
         		g2.drawLine(x1, y1, x2, y1); //N
         		g2.drawLine(x1, y2, x2, y2); //S

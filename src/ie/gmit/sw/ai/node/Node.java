@@ -19,6 +19,7 @@ public class Node {
 	public Node(int row, int col) {
 		this.row = row;
 		this.col = col;
+		this.type = NodeType.Empty;
 	}
 	
 	// get child nodes
@@ -51,6 +52,15 @@ public class Node {
 	}
 	public void setType(NodeType type) {
 		this.type = type;
+		switch (type){
+			case Player:
+				this.color = Color.GREEN;
+				break;
+			case Exit:
+				this.color = Color.CYAN;
+			default:
+				this.color = Color.BLACK;
+		}
 	}
 	public boolean isVisited() {
 		return visited;
@@ -63,9 +73,6 @@ public class Node {
 		return color;
 	}
 
-	public void setColor(Color color) {
-		this.color = color;
-	}
 	
 	public String toString() {
 		if (passage == NodePassage.North){
