@@ -1,14 +1,26 @@
 package ie.gmit.sw.ai;
 
+import java.util.Random;
+
 import ie.gmit.sw.ai.node.*;
 
 public class Maze {
 
 	private Node[][] maze;
+	private Node exit;
 	
 	public Maze(int rows, int cols){
 		maze = new Node[rows][cols];
 		generateMaze();
+		setExit();
+	}
+
+	private void setExit(){
+		Random generator = new Random();
+		int randRow = generator.nextInt(maze.length/2) + maze.length/2;
+		int randCol = generator.nextInt(maze[0].length/2) + maze[0].length/2;
+		maze[randRow][randCol].setType(NodeType.Exit);;
+		exit = maze[randRow][randCol];
 	}
 	
 	//Binary tree algorithm for creating a maze. Adds a bias into the generated structure

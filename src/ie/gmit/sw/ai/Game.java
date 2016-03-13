@@ -12,9 +12,10 @@ import ie.gmit.sw.ai.node.Node;
 import ie.gmit.sw.ai.node.NodeType;
 
 public class Game implements KeyListener{
-	Node[][] maze;
-	Node player;
-	Component mazeview;
+	private Node[][] maze;
+	private Node player;
+	private Component mazeview;
+	private boolean pause = false;
 	
 	public Game(int rows, int cols){
 		maze = new Maze(20, 20).getMaze();
@@ -50,29 +51,29 @@ public class Game implements KeyListener{
 		 * move left	-> a || left arrow
 		 * move right	-> d || right arrow
 		 */
-
-		switch (e.getKeyCode()) {
-			case KeyEvent.VK_UP:
-			case KeyEvent.VK_W:
-				System.out.println("move up");
-				movePlayer(Direction.Up);
-				break;
-			case KeyEvent.VK_DOWN:
-			case KeyEvent.VK_S:
-				System.out.println("move down");
-				movePlayer(Direction.Down);
-				break;
-			case KeyEvent.VK_LEFT:
-			case KeyEvent.VK_A:
-				System.out.println("move left");
-				movePlayer(Direction.Left);
-				break;
-			case KeyEvent.VK_RIGHT:
-			case KeyEvent.VK_D:
-				System.out.println("move right");
-				movePlayer(Direction.Right);
-				break;
-		}
+		if (!pause)
+			switch (e.getKeyCode()) {
+				case KeyEvent.VK_UP:
+				case KeyEvent.VK_W:
+					System.out.println("move up");
+					movePlayer(Direction.Up);
+					break;
+				case KeyEvent.VK_DOWN:
+				case KeyEvent.VK_S:
+					System.out.println("move down");
+					movePlayer(Direction.Down);
+					break;
+				case KeyEvent.VK_LEFT:
+				case KeyEvent.VK_A:
+					System.out.println("move left");
+					movePlayer(Direction.Left);
+					break;
+				case KeyEvent.VK_RIGHT:
+				case KeyEvent.VK_D:
+					System.out.println("move right");
+					movePlayer(Direction.Right);
+					break;
+			}
 		mazeview.repaint();
 		
 	}
@@ -121,11 +122,27 @@ public class Game implements KeyListener{
 		
 		// checking if we can move there
 		if (next != null){
-			next.setType(NodeType.Player);
-			player.setType(NodeType.Empty);
 			
-			player = next;
-			next = null;
+			switch(next.getType()){
+				case Empty:
+					next.setType(NodeType.Player);
+					player.setType(NodeType.Empty);
+					
+					player = next;
+					next = null;
+					break;
+				case Exit:
+					next.setType(NodeType.Player);
+					player.setType(NodeType.Empty);
+					
+					player = next;
+					next = null;
+					
+					pause = true;
+					System.out.println("Well done!");
+					break;
+			}
+			
 		} else{
 			System.out.println("can't move there");
 		}
