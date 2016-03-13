@@ -50,16 +50,32 @@ public class Node {
 	public NodeType getType() {
 		return type;
 	}
+	public int getRow() {
+		return row;
+	}
+
+	public int getCol() {
+		return col;
+	}
+
 	public void setType(NodeType type) {
 		this.type = type;
 		switch (type){
+			case Empty:
+				this.color = Color.BLACK;
+				break;
 			case Player:
 				this.color = Color.GREEN;
 				break;
+			case Item:
+				this.color = Color.YELLOW;
+				break;
+			case Enemy:
+				this.color = Color.RED;
+				break;
 			case Exit:
 				this.color = Color.CYAN;
-			default:
-				this.color = Color.BLACK;
+				break;
 		}
 	}
 	public boolean isVisited() {
