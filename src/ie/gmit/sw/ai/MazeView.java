@@ -15,7 +15,7 @@ import ie.gmit.sw.ai.node.NodeType;
 
 public class MazeView extends JPanel {
 	private static final long serialVersionUID = 1L;
-	public static final int DEFAULT_VIEW_SIZE = 800;	
+	public static final int DEFAULT_VIEW_SIZE = 600;	
 	private Node[][] maze;
 	
 	public MazeView(Node[][] maze){
@@ -29,6 +29,7 @@ public class MazeView extends JPanel {
         Graphics2D g2 = (Graphics2D)g;
         
         final int size = DEFAULT_VIEW_SIZE/maze.length;
+        
         g2.drawRect(0, 0, MazeView.DEFAULT_VIEW_SIZE, MazeView.DEFAULT_VIEW_SIZE);
         
         for(int row = 0; row < maze.length; row++) {
@@ -56,24 +57,27 @@ public class MazeView extends JPanel {
         		}
         	}
         }
+        
+        g2.setColor(Color.GRAY);
+        g2.fillRect(0,MazeView.DEFAULT_VIEW_SIZE,MazeView.DEFAULT_VIEW_SIZE,100);
 	}
 
 	public static void main(String[] args) {
 		Node[][] maze = new Maze(20, 20).getMaze();
 		
-		MazeView mv = new MazeView(maze);
-		Dimension d = new Dimension(MazeView.DEFAULT_VIEW_SIZE, MazeView.DEFAULT_VIEW_SIZE);
-    	mv.setPreferredSize(d);
-    	mv.setMinimumSize(d);
-    	mv.setMaximumSize(d);
+		MazeView mazeview = new MazeView(maze);
+		Dimension dimension = new Dimension(MazeView.DEFAULT_VIEW_SIZE, MazeView.DEFAULT_VIEW_SIZE + 100);
+    	mazeview.setPreferredSize(dimension);
+    	mazeview.setMinimumSize(dimension);
+    	mazeview.setMaximumSize(dimension);
     	
-    	JFrame f = new JFrame("GMIT - B.Sc. in Computing (Software Development)");
-        f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        f.getContentPane().setLayout(new FlowLayout());
-        f.add(mv);
-        f.setSize(1000,1000);
-        f.setLocation(100,100);
-        f.pack();
-        f.setVisible(true);
+    	JFrame frame = new JFrame("GMIT - B.Sc. in Computing (Software Development)");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.getContentPane().setLayout(new FlowLayout());
+        frame.add(mazeview);
+        frame.setSize(1000,1000);
+        frame.setLocation(100,100);
+        frame.pack();
+        frame.setVisible(true);
 	}
 }
