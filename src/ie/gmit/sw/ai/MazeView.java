@@ -18,6 +18,8 @@ public class MazeView extends JPanel {
 	public static final int DEFAULT_VIEW_SIZE = 600;	
 	private Node[][] maze;
 	
+	private boolean zoomOut = true;
+	
 	public MazeView(Node[][] maze){
 		this.maze = maze;
 		setBackground(Color.BLACK);
@@ -62,22 +64,5 @@ public class MazeView extends JPanel {
         g2.fillRect(0,MazeView.DEFAULT_VIEW_SIZE,MazeView.DEFAULT_VIEW_SIZE,100);
 	}
 
-	public static void main(String[] args) {
-		Node[][] maze = new Maze(20, 20).getMaze();
-		
-		MazeView mazeview = new MazeView(maze);
-		Dimension dimension = new Dimension(MazeView.DEFAULT_VIEW_SIZE, MazeView.DEFAULT_VIEW_SIZE + 100);
-    	mazeview.setPreferredSize(dimension);
-    	mazeview.setMinimumSize(dimension);
-    	mazeview.setMaximumSize(dimension);
-    	
-    	JFrame frame = new JFrame("GMIT - B.Sc. in Computing (Software Development)");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.getContentPane().setLayout(new FlowLayout());
-        frame.add(mazeview);
-        frame.setSize(1000,1000);
-        frame.setLocation(100,100);
-        frame.pack();
-        frame.setVisible(true);
-	}
+	
 }

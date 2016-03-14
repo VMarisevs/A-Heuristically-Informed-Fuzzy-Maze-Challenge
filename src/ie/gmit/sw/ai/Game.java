@@ -3,6 +3,7 @@ package ie.gmit.sw.ai;
 import java.awt.*;
 import java.awt.event.*;
 
+import javax.management.monitor.MonitorSettingException;
 import javax.swing.JFrame;
 
 import ie.gmit.sw.ai.node.*;
@@ -11,8 +12,9 @@ public class Game implements KeyListener{
 	private Node[][] maze;
 	private Player player;
 	private Component mazeview;
-	private boolean pause = false;
+	private boolean gameOver = false;
 	private Thread[] monsters = new Thread[3];
+	private Monster[] mons = new Monster[3];
 	
 	public Game(int rows, int cols){
 		maze = new Maze(rows, cols).getMaze();
@@ -25,7 +27,8 @@ public class Game implements KeyListener{
 		
 		// spawn a monster
 		for (int i = 0; i < monsters.length; i++){
-			monsters[i] = new Thread(new Monster(maze, mazeview));
+			mons[i] = new Monster(maze, mazeview);
+			monsters[i] = new Thread(mons[i]);
 			monsters[i].start();
 		}
 		
@@ -50,14 +53,27 @@ public class Game implements KeyListener{
         frame.setVisible(true);
 	}
 		
+	public void killMonster(Node inNode){
+		
+	}
 	
 	public Node[][] getMaze() {
 		return maze;
 	}
 	
 
-	public void setPause(boolean pause) {
-		this.pause = pause;
+	public void setGameOver(boolean gameOver) {
+		this.gameOver = gameOver;
+		
+		if (this.gameOver){
+			for (int i = 0; i < mons.length; i++){
+				mons[i].setAlive(false);
+			}
+		} else{
+			for (int i = 0; i < mons.length; i++){
+				mons[i].setAlive(true);
+			}
+		}
 	}
 
 	@Override
@@ -68,7 +84,7 @@ public class Game implements KeyListener{
 		 * move left	-> a || left arrow
 		 * move right	-> d || right arrow
 		 */
-		if (!pause)
+		if (!gameOver)
 			switch (e.getKeyCode()) {
 				case KeyEvent.VK_UP:
 				case KeyEvent.VK_W:
@@ -97,7 +113,6 @@ public class Game implements KeyListener{
 
 	@Override
 	public void keyReleased(KeyEvent e){}
-
 	@Override
 	public void keyTyped(KeyEvent e){}
 }

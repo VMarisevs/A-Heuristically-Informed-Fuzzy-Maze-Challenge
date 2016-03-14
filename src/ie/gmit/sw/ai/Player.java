@@ -54,9 +54,10 @@ public class Player {
 				case Exit:
 					makeMove(next);
 					System.out.println("Well done!");
-					game.setPause(true);
+					game.setGameOver(true);
 					break;
 				case Monster:
+					// destroy monster..
 					makeMove(next);
 					System.out.println("Let's fight!");
 					break;
