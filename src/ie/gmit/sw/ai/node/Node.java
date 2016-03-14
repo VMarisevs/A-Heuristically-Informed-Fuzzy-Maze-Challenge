@@ -4,10 +4,15 @@ import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
 
+import ie.gmit.sw.ai.node.characters.Monster;
+
 
 public class Node {
 	private NodePassage passage;
+	
 	private NodeType type;
+	private Monster monster;
+	
 	private boolean visited;
 	
 	private Color color = Color.BLACK;
@@ -78,6 +83,15 @@ public class Node {
 				break;
 		}
 	}
+	
+	public void setMonster(Monster monster){
+		this.monster = monster;
+	}
+	public Monster getMonster(){
+		return monster;
+	}
+	
+	
 	public boolean isVisited() {
 		return visited;
 	}

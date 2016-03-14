@@ -16,8 +16,7 @@ public class Game implements KeyListener{
 	private Player player;
 	private Component mazeview;
 	private boolean gameOver = false;
-	private Thread[] monsters = new Thread[3];
-	private Monster[] mons = new Monster[3];
+	private Monster[] monsters = new Monster[3];
 	
 	public Game(int rows, int cols){
 		maze = new Maze(rows, cols).getMaze();
@@ -30,9 +29,8 @@ public class Game implements KeyListener{
 		
 		// spawn a monster
 		for (int i = 0; i < monsters.length; i++){
-			mons[i] = new Monster(maze, mazeview);
-			monsters[i] = new Thread(mons[i]);
-			monsters[i].start();
+			monsters[i] = new Monster(maze, mazeview);
+			new Thread(monsters[i]).start();
 		}
 		
 	}
@@ -55,10 +53,6 @@ public class Game implements KeyListener{
         frame.pack();
         frame.setVisible(true);
 	}
-		
-	public void killMonster(Node inNode){
-		
-	}
 	
 	public Node[][] getMaze() {
 		return maze;
@@ -69,12 +63,12 @@ public class Game implements KeyListener{
 		this.gameOver = gameOver;
 		
 		if (this.gameOver){
-			for (int i = 0; i < mons.length; i++){
-				mons[i].setAlive(false);
+			for (int i = 0; i < monsters.length; i++){
+				monsters[i].setPause(true);
 			}
 		} else{
-			for (int i = 0; i < mons.length; i++){
-				mons[i].setAlive(true);
+			for (int i = 0; i < monsters.length; i++){
+				monsters[i].setPause(false);
 			}
 		}
 	}

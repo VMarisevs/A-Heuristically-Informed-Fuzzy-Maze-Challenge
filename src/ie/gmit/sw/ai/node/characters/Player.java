@@ -60,7 +60,16 @@ public class Player {
 				case Monster:
 					// destroy monster..
 					makeMove(next);
+					
+					Monster monster = next.getMonster();
+					monster.setPause(true);
+					
 					System.out.println("Let's fight!");
+					if (figth(monster)){
+						// poisons the thread 
+						monster.setAlive(false);
+					}
+					
 					break;
 			}
 			
@@ -69,6 +78,14 @@ public class Player {
 			return false;
 		}
 		
+		return true;
+	}
+	
+	private boolean figth(Monster monster){
+		/*
+		 * true = win,
+		 * false = lose
+		 */
 		return true;
 	}
 	
