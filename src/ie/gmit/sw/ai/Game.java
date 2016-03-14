@@ -1,15 +1,11 @@
 package ie.gmit.sw.ai;
 
-import java.awt.Component;
-import java.awt.Dimension;
-import java.awt.FlowLayout;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
+import java.awt.*;
+import java.awt.event.*;
 
 import javax.swing.JFrame;
 
-import ie.gmit.sw.ai.node.Node;
-import ie.gmit.sw.ai.node.NodeType;
+import ie.gmit.sw.ai.node.*;
 
 public class Game implements KeyListener{
 	private Node[][] maze;
@@ -18,13 +14,20 @@ public class Game implements KeyListener{
 	private boolean pause = false;
 	
 	public Game(int rows, int cols){
-		maze = new Maze(20, 20).getMaze();
+		maze = new Maze(rows, cols).getMaze();
 		
 		// set player node at position 0,0
 		player = maze[0][0];
 		player.setType(NodeType.Player);
 		
+		// post a monster
+		new Thread(new Monster(maze)).start();
 		
+		displayMaze();
+		
+	}
+
+	private void displayMaze(){
 		// display maze
 		mazeview = new MazeView(maze);
 		Dimension dimension = new Dimension(MazeView.DEFAULT_VIEW_SIZE, MazeView.DEFAULT_VIEW_SIZE + 100);
@@ -42,7 +45,7 @@ public class Game implements KeyListener{
         frame.pack();
         frame.setVisible(true);
 	}
-
+	
 	@Override
 	public void keyPressed(KeyEvent e) {
 		/*

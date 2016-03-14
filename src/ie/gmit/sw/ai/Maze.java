@@ -19,7 +19,7 @@ public class Maze {
 		Random generator = new Random();
 		int randRow = generator.nextInt(maze.length/2) + maze.length/2;
 		int randCol = generator.nextInt(maze[0].length/2) + maze[0].length/2;
-		maze[randRow][randCol].setType(NodeType.Exit);;
+		maze[randRow][randCol].setType(NodeType.Exit);
 		exit = maze[randRow][randCol];
 	}
 	

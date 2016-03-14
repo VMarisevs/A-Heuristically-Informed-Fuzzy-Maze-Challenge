@@ -70,7 +70,7 @@ public class Node {
 			case Item:
 				this.color = Color.YELLOW;
 				break;
-			case Enemy:
+			case Monster:
 				this.color = Color.RED;
 				break;
 			case Exit:
