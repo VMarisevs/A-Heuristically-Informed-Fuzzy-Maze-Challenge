@@ -49,21 +49,16 @@ public class Player {
 			
 			switch(next.getType()){
 				case Empty:
-					next.setType(NodeType.Player);
-					position.setType(NodeType.Empty);
-					
-					position = next;
-					next = null;
+					makeMove(next);
 					break;
 				case Exit:
-					next.setType(NodeType.Player);
-					position.setType(NodeType.Empty);
-					
-					position = next;
-					next = null;
-					
-					game.setPause(true);
+					makeMove(next);
 					System.out.println("Well done!");
+					game.setPause(true);
+					break;
+				case Monster:
+					makeMove(next);
+					System.out.println("Let's fight!");
 					break;
 			}
 			
@@ -73,5 +68,13 @@ public class Player {
 		}
 		
 		return true;
+	}
+	
+	private void makeMove(Node next){
+		next.setType(NodeType.Player);
+		position.setType(NodeType.Empty);
+		
+		position = next;
+		next = null;
 	}
 }
