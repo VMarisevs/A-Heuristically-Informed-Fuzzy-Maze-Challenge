@@ -1,4 +1,4 @@
-package ie.gmit.sw.ai;
+package ie.gmit.sw.ai.node.characters;
 
 import java.awt.Component;
 import java.util.Random;

@@ -1,5 +1,6 @@
-package ie.gmit.sw.ai;
+package ie.gmit.sw.ai.node.characters;
 
+import ie.gmit.sw.ai.Game;
 import ie.gmit.sw.ai.node.Node;
 import ie.gmit.sw.ai.node.NodeType;
 
