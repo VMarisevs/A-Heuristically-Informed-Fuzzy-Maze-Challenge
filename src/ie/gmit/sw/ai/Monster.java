@@ -1,5 +1,6 @@
 package ie.gmit.sw.ai;
 
+import java.awt.Component;
 import java.util.Random;
 
 import ie.gmit.sw.ai.node.Node;
@@ -10,9 +11,11 @@ public class Monster implements Runnable {
 	private Node[][] maze; // knowledge of maze
 	private Node monster;
 	private boolean alive = true;
+	private Component view;
 	
-	public Monster(Node[][] maze) {
+	public Monster(Node[][] maze, Component view) {
 		this.maze = maze;
+		this.view = view;
 		setMonster();
 	}
 	
@@ -66,6 +69,8 @@ public class Monster implements Runnable {
 					moved = true;
 				}
 			}
+			
+			view.repaint();
 			
 			try {
 				Thread.sleep(1000);

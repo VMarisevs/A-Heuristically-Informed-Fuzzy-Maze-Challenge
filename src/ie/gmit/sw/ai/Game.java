@@ -20,10 +20,14 @@ public class Game implements KeyListener{
 		player = maze[0][0];
 		player.setType(NodeType.Player);
 		
-		// post a monster
-		new Thread(new Monster(maze)).start();
+		
 		
 		displayMaze();
+		
+		// post a monster
+		new Thread(new Monster(maze, mazeview)).start();
+		new Thread(new Monster(maze, mazeview)).start();
+		new Thread(new Monster(maze, mazeview)).start();
 		
 	}
 
