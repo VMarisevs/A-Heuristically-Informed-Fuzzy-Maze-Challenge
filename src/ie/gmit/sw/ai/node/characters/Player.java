@@ -1,22 +1,34 @@
 package ie.gmit.sw.ai.node.characters;
 
+import java.util.Random;
+
 import ie.gmit.sw.ai.Game;
 import ie.gmit.sw.ai.node.Node;
 import ie.gmit.sw.ai.node.NodeType;
 
 public class Player {
 	
-	private Node position;
+	private Node current;
+	private Node[][] maze;
 	private Game game;
 
-	public Player(Node position, Game game) {
-		this.position = position;
-		this.position.setType(NodeType.Player);
+	public Player(Game game) {
+		this.maze = game.getMaze();
 		this.game = game;
+		/*
+		 * player will be spawned in left top corner
+		 */
+		Random generator = new Random();
+		int randRow = generator.nextInt(maze.length / 5);
+		int randCol = generator.nextInt(maze[0].length / 5);
+		
+		this.current = maze[randRow][randCol];
+		this.current.setType(NodeType.Player);
+		this.current.setPlayer(this);
 	}
 	
 	public boolean move(Direction dir){
-		Node[] stepAvailable = position.getChildren(game.getMaze());
+		Node[] stepAvailable = current.getChildren(maze);
 		
 		Node next = null;
 		
@@ -24,22 +36,22 @@ public class Player {
 			switch (dir){
 				case Up:
 					// we can move up
-					if ((stepAvailable[i].getCol() == position.getCol()) && (stepAvailable[i].getRow() + 1 == position.getRow()))
+					if ((stepAvailable[i].getCol() == current.getCol()) && (stepAvailable[i].getRow() + 1 == current.getRow()))
 						next = stepAvailable[i];
 					break;
 				case Down:
 					// we can move down
-					if ((stepAvailable[i].getCol() == position.getCol()) && (stepAvailable[i].getRow() - 1 == position.getRow()))
+					if ((stepAvailable[i].getCol() == current.getCol()) && (stepAvailable[i].getRow() - 1 == current.getRow()))
 						next = stepAvailable[i];
 					break;
 				case Left:
 					// we can move left
-					if ((stepAvailable[i].getCol() + 1 == position.getCol()) && (stepAvailable[i].getRow() == position.getRow()))
+					if ((stepAvailable[i].getCol() + 1 == current.getCol()) && (stepAvailable[i].getRow() == current.getRow()))
 						next = stepAvailable[i];
 					break;
 				case Right:
 					// we can move right
-					if ((stepAvailable[i].getCol() - 1 == position.getCol()) && (stepAvailable[i].getRow() == position.getRow()))
+					if ((stepAvailable[i].getCol() - 1 == current.getCol()) && (stepAvailable[i].getRow() == current.getRow()))
 						next = stepAvailable[i];
 					break;
 			}
@@ -92,10 +104,10 @@ public class Player {
 	private void makeMove(Node next){
 		next.setType(NodeType.Player);
 		next.setPlayer(this);
-		position.setType(NodeType.Empty);
-		position.setPlayer(null);
+		current.setType(NodeType.Empty);
+		current.setPlayer(null);
 		
-		position = next;
+		current = next;
 		next = null;
 	}
 }
