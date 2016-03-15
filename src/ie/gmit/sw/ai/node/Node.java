@@ -9,7 +9,6 @@ import ie.gmit.sw.ai.node.characters.Player;
 
 
 public class Node {
-	private NodePassage passage;
 	
 	private NodeType type;
 	private Monster monster;
@@ -34,26 +33,19 @@ public class Node {
 		
 		List<Node> children = new ArrayList<Node>();
 		
-		if ((col - 1 >= 0) && (passage == NodePassage.West))
-			children.add(maze[row][col-1]);
-		if ((col + 1 < maze[row].length) && (maze[row][col+1].getPassage() == NodePassage.West))
-			children.add(maze[row][col+1]);
-		if ((row - 1 >= 0) && (passage == NodePassage.North))
-			children.add(maze[row-1][col]);
-		if ((row + 1 < maze.length) && maze[row+1][col].getPassage() == NodePassage.North)
-			children.add(maze[row+1][col]);
-		
+		if ((col - 1 >= 0) && maze[row][col - 1].getType() != NodeType.Wall)
+			children.add(maze[row][col - 1]);
+		if ((col + 1 < maze[row].length) && maze[row][col + 1].getType() != NodeType.Wall)
+			children.add(maze[row][col + 1]);
+		if ((row - 1 >= 0) && maze[row - 1][col].getType() != NodeType.Wall)
+			children.add(maze[row - 1][col]);
+		if ((row + 1 < maze.length) && maze[row + 1][col].getType() != NodeType.Wall)
+			children.add(maze[row + 1][col]);
+
 		// return max 4 children if there is no walls between them 
 		return (Node[])children.toArray(new Node[children.size()]);
 	}
 	
-	// getters and setters
-	public NodePassage getPassage() {
-		return passage;
-	}
-	public void setPassage(NodePassage passage) {
-		this.passage = passage;
-	}
 	public NodeType getType() {
 		return type;
 	}
@@ -79,6 +71,9 @@ public class Node {
 				break;
 			case Monster:
 				this.color = Color.RED;
+				break;
+			case Wall:
+				this.color = Color.LIGHT_GRAY;
 				break;
 			case Exit:
 				this.color = Color.CYAN;
@@ -115,11 +110,22 @@ public class Node {
 
 	
 	public String toString() {
+		switch(type){
+			case Wall:
+				return "w";
+			case Player:
+				return "p";
+			case Exit:
+				return "e";
+			default:
+				return " ";
+		}
+		/*
 		if (passage == NodePassage.North){
 			return "N ";
 		}else{
 			return "W ";
-		}
+		}*/
 	}
 	
 }

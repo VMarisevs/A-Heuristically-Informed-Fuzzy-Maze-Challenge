@@ -19,6 +19,7 @@ public class Game implements KeyListener{
 	private Monster[] monsters = new Monster[3];
 	
 	public Game(int rows, int cols){
+		//maze = new Maze(rows, cols).getMaze();
 		maze = new Maze(rows, cols).getMaze();
 		
 		// set player node at position 0,0

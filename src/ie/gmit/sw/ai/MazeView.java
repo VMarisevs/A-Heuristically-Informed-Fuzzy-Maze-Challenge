@@ -10,8 +10,6 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import ie.gmit.sw.ai.node.Node;
-import ie.gmit.sw.ai.node.NodePassage;
-import ie.gmit.sw.ai.node.NodeType;
 
 public class MazeView extends JPanel {
 	private static final long serialVersionUID = 1L;
@@ -38,25 +36,11 @@ public class MazeView extends JPanel {
         	for (int col = 0; col < maze[row].length; col++){  
         		int x1 = col * size;
         		int y1 = row * size;
-        		int x2 = (col + 1) * size;
-        		int y2 = (row + 1) * size;
         		
         		// painting square with color
         		g2.setColor(maze[row][col].getColor());
    				g2.fillRect(x1, y1, size, size);
-        		   				
-        		g2.setColor(Color.RED);
-        		g2.drawLine(x1, y1, x2, y1); //N
-        		g2.drawLine(x1, y2, x2, y2); //S
-        		g2.drawLine(x2, y1, x2, y2); //E
-        		g2.drawLine(x1, y1, x1, y2); //W
         		
-        		g2.setColor(maze[row][col].getColor());
-        		if (maze[row][col].getPassage() == NodePassage.North){
-        			g2.drawLine(x1 + 1, y1, x2 - 1, y1); //N
-        		}else{
-        			g2.drawLine(x1, y1 + 1, x1, y2 -1); //W
-        		}
         	}
         }
         
