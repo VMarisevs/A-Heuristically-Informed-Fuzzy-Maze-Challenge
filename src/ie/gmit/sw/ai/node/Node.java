@@ -6,6 +6,7 @@ import java.util.List;
 
 import ie.gmit.sw.ai.node.characters.Monster;
 import ie.gmit.sw.ai.node.characters.Player;
+import ie.gmit.sw.ai.node.items.Item;
 
 
 public class Node {
@@ -13,6 +14,7 @@ public class Node {
 	private NodeType type;
 	private Monster monster;
 	private Player player;
+	private Item item;
 	
 	private boolean visited;
 	
@@ -95,6 +97,14 @@ public class Node {
 
 	public void setPlayer(Player player) {
 		this.player = player;
+	}
+
+	public Item getItem() {
+		return item;
+	}
+
+	public void setItem(Item item) {
+		this.item = item;
 	}
 
 	public boolean isVisited() {

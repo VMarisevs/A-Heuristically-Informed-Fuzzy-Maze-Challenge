@@ -38,7 +38,7 @@ public class Game implements KeyListener{
 
 	private void displayMaze(){
 		// display maze
-		mazeview = new MazeView(maze);
+		mazeview = new MazeView(maze, player);
 		Dimension dimension = new Dimension(MazeView.DEFAULT_VIEW_SIZE, MazeView.DEFAULT_VIEW_SIZE + 100);
     	mazeview.setPreferredSize(dimension);
     	mazeview.setMinimumSize(dimension);

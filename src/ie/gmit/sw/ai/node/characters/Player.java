@@ -1,16 +1,18 @@
 package ie.gmit.sw.ai.node.characters;
 
-import java.util.Random;
+import java.util.*;
 
 import ie.gmit.sw.ai.Game;
 import ie.gmit.sw.ai.node.Node;
 import ie.gmit.sw.ai.node.NodeType;
+import ie.gmit.sw.ai.node.items.Item;
 
 public class Player {
 	
 	private Node current;
 	private Node[][] maze;
 	private Game game;
+	private List<Item> items = new ArrayList<Item>();
 
 	public Player(Game game) {
 		this.maze = game.getMaze();
@@ -64,6 +66,13 @@ public class Player {
 				case Empty:
 					makeMove(next);
 					break;
+				case Item:
+					makeMove(next);
+					Item item = next.getItem();
+					items.add( item);
+					next.setItem(null);
+					System.out.println(item.getType() + " collected.");
+					break;
 				case Exit:
 					makeMove(next);
 					System.out.println("Well done!");
@@ -109,5 +118,9 @@ public class Player {
 		
 		current = next;
 		next = null;
+	}
+	
+	public Item[] getItems(){
+		return items.toArray(new Item[items.size()]);
 	}
 }

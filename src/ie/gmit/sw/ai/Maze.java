@@ -4,6 +4,7 @@ import java.util.Random;
 
 import ie.gmit.sw.ai.node.Node;
 import ie.gmit.sw.ai.node.NodeType;
+import ie.gmit.sw.ai.node.items.*;
 
 public class Maze {
 
@@ -28,8 +29,12 @@ public class Maze {
 			int row = generator.nextInt(maze.length);
 			int col = generator.nextInt(maze[0].length);
 			
+			
 			if (maze[row][col].getType() == NodeType.Empty){
 				maze[row][col].setType(NodeType.Item);
+				Item item = new Sword(maze[row][col]);
+				maze[row][col].setItem(item);
+						
 				counter++;
 			}
 		}
