@@ -26,9 +26,10 @@ public class Maze {
 	
 	private void buildMaze(){
 		for (int row = 0; row < maze.length; row++){
+			
 			for (int col = 0; col < maze[row].length - 1; col++){
 				int num = (int) (Math.random() * 10);
-				if (num >= 5 && col + 1 < maze[row].length - 1){
+				if (num >= 5 && col + 1 < maze[row].length){
 					maze[row][col + 1].setType(NodeType.Empty);
 					continue;
 				}
