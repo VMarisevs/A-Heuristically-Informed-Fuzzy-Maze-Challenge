@@ -1,5 +1,7 @@
 package ie.gmit.sw.ai;
 
+import java.util.Random;
+
 import ie.gmit.sw.ai.node.Node;
 import ie.gmit.sw.ai.node.NodeType;
 
@@ -12,12 +14,47 @@ public class Maze {
 		
 		init();
 		buildMaze();
+		
+		spawnItems((int)((rows * cols) * 0.01));
+		generateExit(1);
+	}
+	
+	private void spawnItems(int count){
+		Random generator = new Random();
+		
+		int counter = 0;
+		
+		while (counter < count){
+			int row = generator.nextInt(maze.length);
+			int col = generator.nextInt(maze[0].length);
+			
+			if (maze[row][col].getType() == NodeType.Empty){
+				maze[row][col].setType(NodeType.Item);
+				counter++;
+			}
+		}
+	}
+	
+	private void generateExit(int count){
+		Random generator = new Random();
+		
+		int counter = 0;
+		
+		while (counter < count){
+			int row = generator.nextInt(maze.length/2) + maze.length/2;
+			int col = generator.nextInt(maze[0].length/2) + maze[0].length/2;
+			
+			if (maze[row][col].getType() == NodeType.Empty){
+				maze[row][col].setType(NodeType.Exit);
+				counter++;
+			}
+		}
 	}
 	
 	private void init(){
 		for (int row = 0; row < maze.length; row++){
 			for (int col = 0; col < maze[row].length; col++){
-				maze[row][col] = new Node(row,col);//.setType(NodeType.Wall);
+				maze[row][col] = new Node(row,col);
 				maze[row][col].setType(NodeType.Wall);
 			}
 			

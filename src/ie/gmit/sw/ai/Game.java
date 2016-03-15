@@ -23,7 +23,7 @@ public class Game implements KeyListener{
 		maze = new Maze(rows, cols).getMaze();
 		
 		// set player node at position 0,0
-		player = new Player(this);	
+		player = new Player(this);
 		
 		
 		displayMaze();
