@@ -64,8 +64,7 @@ public class Player {
 					Monster monster = next.getMonster();
 					monster.setPause(true);
 					
-					System.out.println("Let's fight!");
-					if (figth(monster)){
+					if (fight(monster)){
 						// poisons the thread 
 						monster.setAlive(false);
 					}
@@ -81,7 +80,8 @@ public class Player {
 		return true;
 	}
 	
-	private boolean figth(Monster monster){
+	public boolean fight(Monster monster){
+		System.out.println("Let's fight!");
 		/*
 		 * true = win,
 		 * false = lose
@@ -91,7 +91,9 @@ public class Player {
 	
 	private void makeMove(Node next){
 		next.setType(NodeType.Player);
+		next.setPlayer(this);
 		position.setType(NodeType.Empty);
+		position.setPlayer(null);
 		
 		position = next;
 		next = null;

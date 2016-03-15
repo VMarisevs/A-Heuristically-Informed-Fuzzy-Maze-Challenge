@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ie.gmit.sw.ai.node.characters.Monster;
+import ie.gmit.sw.ai.node.characters.Player;
 
 
 public class Node {
@@ -12,6 +13,7 @@ public class Node {
 	
 	private NodeType type;
 	private Monster monster;
+	private Player player;
 	
 	private boolean visited;
 	
@@ -87,11 +89,19 @@ public class Node {
 	public void setMonster(Monster monster){
 		this.monster = monster;
 	}
+	
 	public Monster getMonster(){
 		return monster;
 	}
 	
-	
+	public Player getPlayer() {
+		return player;
+	}
+
+	public void setPlayer(Player player) {
+		this.player = player;
+	}
+
 	public boolean isVisited() {
 		return visited;
 	}

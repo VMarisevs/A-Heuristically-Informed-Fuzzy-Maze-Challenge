@@ -85,18 +85,23 @@ public class Monster implements Runnable {
 					 *  if next cell empty making a movement
 					 *  repainting and waiting for 1 sec 
 					 */
-					if (next.getType() == NodeType.Empty){
-						
-						next.setType(NodeType.Monster);
-						next.setMonster(this);
-						
-						current.setType(NodeType.Empty);
-						current.setMonster(null);
-						
-						current = next;
-						next = null;
-						moved = true;
+					
+					switch(next.getType()){
+						case Empty:
+							makeMove(next);
+							moved = true;
+							break;
+						case Player:
+							makeMove(next);
+							pause = true;
+							Player player = next.getPlayer();
+							if (player.fight(this)){
+								alive = false;
+							}
+							moved = true;
+							break;
 					}
+					
 				}
 				
 				view.repaint();
@@ -110,5 +115,16 @@ public class Monster implements Runnable {
 		}
 		// kill thread if fight is won
 		System.out.println("Monster poisoned...");
+	}
+	
+	private void makeMove(Node next){
+		next.setType(NodeType.Monster);
+		next.setMonster(this);
+		
+		current.setType(NodeType.Empty);
+		current.setMonster(null);
+		
+		current = next;
+		next = null;
 	}
 }
