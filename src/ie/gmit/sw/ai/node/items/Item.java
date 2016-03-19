@@ -1,47 +1,41 @@
 package ie.gmit.sw.ai.node.items;
 
+
+import java.awt.Color;
+
 import ie.gmit.sw.ai.node.Node;
 import ie.gmit.sw.ai.node.NodeType;
 
 public class Item {
-	private int radius;
-	private int damage;
-	private int selfdamage;
-	private boolean bomb;
 	
+	private int power;
 	private NodeType type;
 	private Node position;
+	private Color color;
 	
 	public Item(NodeType type, Node position) {
 		this.type = type;
 		this.position = position;
 	}
-	public int getRadius() {
-		return radius;
-	}
-	public void setRadius(int radius) {
-		this.radius = radius;
-	}
-	public int getDamage() {
-		return damage;
-	}
-	public void setDamage(int damage) {
-		this.damage = damage;
-	}
-	public int getSelfdamage() {
-		return selfdamage;
-	}
-	public void setSelfdamage(int selfdamage) {
-		this.selfdamage = selfdamage;
-	}
-	public boolean isBomb() {
-		return bomb;
-	}
-	public void setBomb(boolean bomb) {
-		this.bomb = bomb;
-	}
+
 	public NodeType getType() {
 		return type;
+	}
+
+	public int getPower() {
+		return power;
+	}
+
+	protected void setPower(int power) {
+		this.power = power;
+	}
+
+	public Color getColor() {
+		return color;
+	}
+
+	protected void setColor(Color color) {
+		this.color = color;
 	}
 	
 	

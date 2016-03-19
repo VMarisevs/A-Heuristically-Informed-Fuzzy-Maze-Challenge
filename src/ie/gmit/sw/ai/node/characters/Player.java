@@ -13,10 +13,13 @@ public class Player {
 	private Node[][] maze;
 	private Game game;
 	private List<Item> items = new ArrayList<Item>();
+	
+	private int health;
 
 	public Player(Game game) {
 		this.maze = game.getMaze();
 		this.game = game;
+		this.health = 100;
 		/*
 		 * player will be spawned in left top corner
 		 */
@@ -66,12 +69,13 @@ public class Player {
 				case Empty:
 					makeMove(next);
 					break;
-				case Item:
+				case Sword:
+				case Gun:
 					makeMove(next);
 					Item item = next.getItem();
 					items.add( item);
 					next.setItem(null);
-					System.out.println(item.getType() + " collected.");
+					System.out.println(item.getType() + " collected. With power " + item.getPower());
 					break;
 				case Exit:
 					makeMove(next);
@@ -123,4 +127,15 @@ public class Player {
 	public Item[] getItems(){
 		return items.toArray(new Item[items.size()]);
 	}
+
+	
+	public int getHealth() {
+		return health;
+	}
+
+	public void setHealth(int health) {
+		this.health = health;
+	}
+	
+	
 }

@@ -1,5 +1,8 @@
 package ie.gmit.sw.ai.node.items;
 
+import java.awt.Color;
+import java.util.Random;
+
 import ie.gmit.sw.ai.node.Node;
 import ie.gmit.sw.ai.node.NodeType;
 
@@ -8,10 +11,8 @@ public class Sword extends Item {
 
 	public Sword(Node position) {
 		super(NodeType.Sword, position);
-		this.setBomb(false);
-		this.setDamage(20);
-		this.setRadius(0);
-		this.setSelfdamage(30);
+		this.setPower(new Random().nextInt(4) +2);
+		this.setColor(Color.YELLOW);
 	}
 	
 }

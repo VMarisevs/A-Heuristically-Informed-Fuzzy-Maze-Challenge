@@ -31,8 +31,20 @@ public class Maze {
 			
 			
 			if (maze[row][col].getType() == NodeType.Empty){
-				maze[row][col].setType(NodeType.Item);
-				Item item = new Sword(maze[row][col]);
+				
+				
+				Item item = null;
+				switch (new Random().nextInt(2)) {
+				case 0:
+					item = new Sword(maze[row][col]);
+					break;
+				case 1:
+					item = new Gun(maze[row][col]);
+					break;
+
+				}
+				
+				maze[row][col].setType(item.getType());
 				maze[row][col].setItem(item);
 						
 				counter++;

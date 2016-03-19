@@ -10,13 +10,18 @@ public class Monster implements Runnable {
 
 	private Node[][] maze; // knowledge of maze
 	private Node current;
+	
 	private boolean alive = true;
 	private boolean pause = false;
+	private int strength;
+	
 	private Component view;
 	
 	public Monster(Node[][] maze, Component view) {
 		this.maze = maze;
 		this.view = view;
+		
+		this.strength = new Random().nextInt(11); // randomly apply strength
 		setMonster();
 	}
 	
@@ -127,4 +132,10 @@ public class Monster implements Runnable {
 		current = next;
 		next = null;
 	}
+
+	
+	public int getStrength() {
+		return strength;
+	}
+	
 }

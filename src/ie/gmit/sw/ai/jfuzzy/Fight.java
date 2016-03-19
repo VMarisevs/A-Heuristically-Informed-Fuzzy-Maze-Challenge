@@ -36,8 +36,8 @@ public class Fight {
          * Rule 1: weak monster, powerful weapon = excellent victory
          */
         fis.setVariable("monster_strength", 0);
-        fis.setVariable("weapon_power", 10);
-        fis.setVariable("life_force", 100);
+        fis.setVariable("weapon_power", 0);
+        fis.setVariable("life_force", 0);
         fis.evaluate();        
         Variable victory = functionBlock.getVariable("victory");
         System.out.println("Rule 1 excellent victory : " + victory.getValue());

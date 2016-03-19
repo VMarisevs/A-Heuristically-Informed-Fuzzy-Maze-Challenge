@@ -68,8 +68,11 @@ public class Node {
 			case Player:
 				this.color = Color.GREEN;
 				break;
-			case Item:
+			case Sword:
 				this.color = Color.YELLOW;
+				break;
+			case Gun:
+				this.color = Color.ORANGE;
 				break;
 			case Monster:
 				this.color = Color.RED;
