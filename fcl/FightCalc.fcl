@@ -1,0 +1,42 @@
+FUNCTION_BLOCK Fight
+
+	VAR_INPUT
+		monster_strength : REAL;
+		weapon_power : REAL;
+		life_force : REAL;	
+	END_VAR
+
+	VAR_OUTPUT
+		victory : REAL;
+	END_VAR
+
+	
+	FUZZIFY monster_strength
+		TERM low := SIGM -4 2;
+		TERM average := GBELL 2 3 4;
+		TERM high := SIGM 4 7;
+	END_FUZZIFY
+	
+	FUZZIFY weapon_power
+		TERM none := (0, 1) (1,0);
+		TERM low := (1,0) (4,1) (6,0);
+		TERM average := GAUSS 7 1;
+		TERM high :=  (7,0) (9,1) (10,1);
+	END_FUZZIFY
+	
+	FUZZIFY life_force
+		// 0 - 100 health points
+		TERM dead := (0,1)(20,0);
+		TERM alive := SIGM 0.2 40;
+	END_FUZZIFY
+
+	DEFUZZIFY victory
+		TERM poor := (0,1) (0.2,1) (0.3,0);
+		TERM good := (0.3,0) (0.5,1) (0.6,0);
+		TERM excellent := (0.6,0) (0.8,1) (1,1);
+		METHOD : COG;		// Use 'Center Of Gravity' defuzzification method
+		DEFAULT := 0;		// Default value is 0 (if no rule activates defuzzifier)
+	END_DEFUZZIFY
+
+	
+END_FUNCTION_BLOCK

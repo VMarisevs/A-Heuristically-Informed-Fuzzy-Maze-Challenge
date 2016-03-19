@@ -58,8 +58,9 @@ public class MazeView extends JPanel {
         
         Item[] items = player.getItems();
         final int size = DEFAULT_VIEW_SIZE/10;
-        for (int i = 0; i < items.length; i++){
-        	int x1 = i * size;
+        
+        for (int i = 0; i < items.length && i < 8; i++){
+        	int x1 = i * (size+10);
     		int y1 = MazeView.DEFAULT_VIEW_SIZE;
     		g2.setColor(Color.YELLOW);
         	g2.fillRect(x1, y1, size, size);
