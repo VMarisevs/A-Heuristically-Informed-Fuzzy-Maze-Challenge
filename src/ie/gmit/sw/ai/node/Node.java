@@ -151,4 +151,11 @@ public class Node {
 		}*/
 	}
 	
+	public int getHeuristic(Node goal){
+		double x1 = this.col;
+		double y1 = this.row;
+		double x2 = goal.getCol();
+		double y2 = goal.getRow();
+		return (int) Math.sqrt(Math.pow((x2 - x1), 2) + Math.pow((y2 - y1), 2));
+	}
 }

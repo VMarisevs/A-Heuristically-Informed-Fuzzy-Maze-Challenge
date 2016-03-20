@@ -6,12 +6,14 @@ import java.util.Random;
 import ie.gmit.sw.ai.Maze;
 import ie.gmit.sw.ai.node.Node;
 import ie.gmit.sw.ai.node.NodeType;
+import ie.gmit.sw.ai.node.characters.traversers.BestFirstTraversator;
 import ie.gmit.sw.ai.node.characters.traversers.BruteForceTraversator;
 
 public class Monster implements Runnable {
 
 	private Node[][] maze; // knowledge of maze
 	private Node current;
+	private Player player; // knowledge about player position
 	
 	private boolean alive = true;
 	private boolean pause = false;
@@ -19,9 +21,10 @@ public class Monster implements Runnable {
 	
 	private Component view;
 	
-	public Monster(Node[][] maze, Component view) {
+	public Monster(Node[][] maze,Player player, Component view) {
 		this.maze = maze;
 		this.view = view;
+		this.player = player;
 		
 		this.strength = new Random().nextInt(11); // randomly apply strength
 		setMonster();
@@ -88,7 +91,9 @@ public class Monster implements Runnable {
 					
 					//Node next = stepsAvailable[random];
 					
-					Node next = new BruteForceTraversator().traverse(maze, current, this);
+					//Node next = new BruteForceTraversator().traverse(maze, current, this);
+					
+					Node next = new BestFirstTraversator(player.getPosition()).traverse(maze, current, this);
 					
 					Maze.clearMaze(maze);
 					/*

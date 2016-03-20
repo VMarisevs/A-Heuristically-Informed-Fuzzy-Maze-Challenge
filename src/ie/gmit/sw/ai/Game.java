@@ -30,7 +30,7 @@ public class Game implements KeyListener{
 		
 		// spawn a monster
 		for (int i = 0; i < monsters.length; i++){
-			monsters[i] = new Monster(maze, mazeview);
+			monsters[i] = new Monster(maze, player, mazeview);
 			new Thread(monsters[i]).start();
 		}
 		

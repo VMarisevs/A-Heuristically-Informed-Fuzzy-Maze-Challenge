@@ -157,5 +157,9 @@ public class Player {
 		this.health = health;
 	}
 	
+	public Node getPosition(){
+		return this.current;
+	}
+	
 	
 }

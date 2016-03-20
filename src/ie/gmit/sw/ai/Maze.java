@@ -111,10 +111,14 @@ public class Maze {
 	}
 
 	public static void clearMaze(Node[][] maze){
+		int explored = 0;
 		for (int i = 0; i < maze.length; i++){
 			for (int j = 0; j < maze[i].length; j++){
+				if (maze[i][j].isVisited())
+					explored++;
 				maze[i][j].setVisited(false);
 			}
 		}
+		System.out.println("Nodes explored: " + explored);
 	}
 }
