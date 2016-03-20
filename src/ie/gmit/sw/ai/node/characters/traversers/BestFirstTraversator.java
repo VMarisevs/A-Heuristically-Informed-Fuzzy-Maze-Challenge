@@ -1,8 +1,6 @@
 package ie.gmit.sw.ai.node.characters.traversers;
 
-import java.util.Collections;
-import java.util.Deque;
-import java.util.LinkedList;
+import java.util.*;
 
 import ie.gmit.sw.ai.node.Node;
 import ie.gmit.sw.ai.node.characters.Monster;

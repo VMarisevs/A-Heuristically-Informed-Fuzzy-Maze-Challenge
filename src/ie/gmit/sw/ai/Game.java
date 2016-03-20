@@ -3,13 +3,10 @@ package ie.gmit.sw.ai;
 import java.awt.*;
 import java.awt.event.*;
 
-import javax.management.monitor.MonitorSettingException;
 import javax.swing.JFrame;
 
 import ie.gmit.sw.ai.node.*;
-import ie.gmit.sw.ai.node.characters.Direction;
-import ie.gmit.sw.ai.node.characters.Monster;
-import ie.gmit.sw.ai.node.characters.Player;
+import ie.gmit.sw.ai.node.characters.*;
 
 public class Game implements KeyListener{
 	private Node[][] maze;

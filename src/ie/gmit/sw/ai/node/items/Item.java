@@ -3,8 +3,6 @@ package ie.gmit.sw.ai.node.items;
 
 import java.awt.Color;
 
-import ie.gmit.sw.ai.node.Node;
-
 public abstract class Item {
 	
 	private int power;

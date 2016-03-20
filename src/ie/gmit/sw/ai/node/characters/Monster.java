@@ -5,8 +5,7 @@ import java.util.Random;
 
 import ie.gmit.sw.ai.Maze;
 import ie.gmit.sw.ai.node.Node;
-import ie.gmit.sw.ai.node.characters.traversers.BestFirstTraversator;
-import ie.gmit.sw.ai.node.characters.traversers.BruteForceTraversator;
+import ie.gmit.sw.ai.node.characters.traversers.*;
 
 public class Monster implements Runnable {
 
@@ -72,11 +71,7 @@ public class Monster implements Runnable {
 	private void move(){
 		while(alive){
 			
-			if (!pause){
-				Node[] stepsAvailable = current.getChildren(maze);
-				
-				Random generator = new Random();
-				
+			if (!pause){				
 				boolean moved = false;
 					
 				while(!moved){
@@ -85,11 +80,27 @@ public class Monster implements Runnable {
 					 * * child nodes = all available moves
 					 * 
 					 */
+					
+					/*
+					Node[] stepsAvailable = current.getChildren(maze);
+					
+					Random generator = new Random();
+					
 					int random = generator.nextInt(stepsAvailable.length);
 					
-					//Node next = stepsAvailable[random];
+					Node next = stepsAvailable[random];
+					*/
 					
+					
+					/*
+					 *  Looking for player using Brute Force Search algorithm
+					 */
 					//Node next = new BruteForceTraversator().traverse(maze, current, this);
+					
+					
+					/*
+					 *  Looking for player using Best First Search algorithm
+					 */
 					
 					Node next = new BestFirstTraversator(player.getPosition()).traverse(maze, current, this);
 					

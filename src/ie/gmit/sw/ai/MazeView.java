@@ -1,13 +1,7 @@
 package ie.gmit.sw.ai;
 
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.FlowLayout;
-import java.awt.Font;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
+import java.awt.*;
 
-import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import ie.gmit.sw.ai.node.Node;
@@ -20,7 +14,7 @@ public class MazeView extends JPanel {
 	private Node[][] maze;
 	private Player player;
 	
-	private boolean zoomOut = true;
+	//private boolean zoomOut = true;
 	
 	public MazeView(Node[][] maze, Player player){
 		this.maze = maze;
