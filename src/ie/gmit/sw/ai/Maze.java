@@ -109,4 +109,12 @@ public class Maze {
 		}
 		return sb.toString();
 	}
+
+	public static void clearMaze(Node[][] maze){
+		for (int i = 0; i < maze.length; i++){
+			for (int j = 0; j < maze[i].length; j++){
+				maze[i][j].setVisited(false);
+			}
+		}
+	}
 }

@@ -3,8 +3,10 @@ package ie.gmit.sw.ai.node.characters;
 import java.awt.Component;
 import java.util.Random;
 
+import ie.gmit.sw.ai.Maze;
 import ie.gmit.sw.ai.node.Node;
 import ie.gmit.sw.ai.node.NodeType;
+import ie.gmit.sw.ai.node.characters.traversers.BruteForceTraversator;
 
 public class Monster implements Runnable {
 
@@ -84,8 +86,11 @@ public class Monster implements Runnable {
 					 */
 					int random = generator.nextInt(stepsAvailable.length);
 					
-					Node next = stepsAvailable[random];
+					//Node next = stepsAvailable[random];
 					
+					Node next = new BruteForceTraversator().traverse(maze, current, this);
+					
+					Maze.clearMaze(maze);
 					/*
 					 *  if next cell empty making a movement
 					 *  repainting and waiting for 1 sec 

@@ -16,7 +16,7 @@ public class Game implements KeyListener{
 	private Player player;
 	private Component mazeview;
 	private boolean gameOver = false;
-	private Monster[] monsters = new Monster[3];
+	private Monster[] monsters = new Monster[1];
 	
 	public Game(int rows, int cols){
 		

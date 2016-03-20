@@ -16,12 +16,15 @@ public class Node {
 	private Player player;
 	private Item item;
 	
-	private boolean visited;
+	
 	
 	private Color color = Color.BLACK;
 	private int row = -1;
 	private int col = -1;
 	
+	// for traversator
+	private Node parent;
+	private boolean visited;
 	
 	// Constructor
 	public Node(int row, int col) {
@@ -115,6 +118,13 @@ public class Node {
 	}
 	public void setVisited(boolean visited) {
 		this.visited = visited;
+	}
+	
+	public Node getParent() {
+		return parent;
+	}
+	public void setParent(Node parent) {
+		this.parent = parent;
 	}
 	
 	public Color getColor() {
