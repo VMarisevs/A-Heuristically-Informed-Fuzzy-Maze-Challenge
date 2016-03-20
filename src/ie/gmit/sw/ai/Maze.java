@@ -3,7 +3,6 @@ package ie.gmit.sw.ai;
 import java.util.Random;
 
 import ie.gmit.sw.ai.node.Node;
-import ie.gmit.sw.ai.node.NodeType;
 import ie.gmit.sw.ai.node.items.*;
 
 public class Maze {

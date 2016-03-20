@@ -5,7 +5,6 @@ import java.util.*;
 import ie.gmit.sw.ai.Game;
 import ie.gmit.sw.ai.jfuzzy.Fight;
 import ie.gmit.sw.ai.node.Node;
-import ie.gmit.sw.ai.node.NodeType;
 import ie.gmit.sw.ai.node.items.Item;
 
 public class Player {
@@ -87,7 +86,7 @@ public class Player {
 					Item item = next.getItem();
 					items.add(item);
 					next.setItem(null);
-					System.out.println(item.getType() + " collected. With power " + item.getPower());
+					System.out.println(item.toString() + " collected. With power " + item.getPower());
 				}
 				
 				if (next.getMonster() != null){

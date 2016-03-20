@@ -5,7 +5,6 @@ import java.util.Random;
 
 import ie.gmit.sw.ai.Maze;
 import ie.gmit.sw.ai.node.Node;
-import ie.gmit.sw.ai.node.NodeType;
 import ie.gmit.sw.ai.node.characters.traversers.BestFirstTraversator;
 import ie.gmit.sw.ai.node.characters.traversers.BruteForceTraversator;
 

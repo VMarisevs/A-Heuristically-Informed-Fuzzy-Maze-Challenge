@@ -4,7 +4,6 @@ import java.util.Deque;
 import java.util.LinkedList;
 
 import ie.gmit.sw.ai.node.Node;
-import ie.gmit.sw.ai.node.NodeType;
 import ie.gmit.sw.ai.node.characters.Monster;
 
 public class BruteForceTraversator implements Traversator{
