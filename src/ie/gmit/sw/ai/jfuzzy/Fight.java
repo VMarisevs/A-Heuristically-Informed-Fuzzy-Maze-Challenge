@@ -7,6 +7,42 @@ import net.sourceforge.jFuzzyLogic.rule.Variable;
 
 public class Fight {
 
+	
+	
+	private FIS fis;
+	private FunctionBlock functionBlock;
+	
+	// creating a singleton class
+	private static Fight instance;
+	
+	private Fight() {
+		String fileName = "fcl/FightCalc.fcl";
+        fis = FIS.load(fileName,true);
+        
+        functionBlock = fis.getFunctionBlock("Fight");
+	}
+	
+	public static Fight getInstance(){
+		
+		if (instance == null){
+			instance = new Fight();
+		}
+		
+		return instance;
+	}
+	
+	public int getVictory(int monsterStrength, int weaponPower, int lifeForce){
+				
+        fis.setVariable("monster_strength", monsterStrength);
+        fis.setVariable("weapon_power", weaponPower);
+        fis.setVariable("life_force", lifeForce);
+        fis.evaluate();        
+        Variable victory = functionBlock.getVariable("victory");
+       // System.out.println("Rule 1 excellent victory : " + victory.getValue());
+		
+		return (int)victory.getValue();
+	}
+	
 	public static void main(String[] args) {
 		/*
 		 * This is jfuzzy logic tester class
