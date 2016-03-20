@@ -3,6 +3,7 @@ package ie.gmit.sw.ai.node.characters;
 import java.util.*;
 
 import ie.gmit.sw.ai.Game;
+import ie.gmit.sw.ai.jfuzzy.Fight;
 import ie.gmit.sw.ai.node.Node;
 import ie.gmit.sw.ai.node.NodeType;
 import ie.gmit.sw.ai.node.items.Item;
@@ -111,6 +112,12 @@ public class Player {
 		 * true = win,
 		 * false = lose
 		 */
+		
+		Fight fight = Fight.getInstance();
+		
+		double victory = fight.getVictory(monster.getStrength(), getItemPower(), health);
+		
+		health = (int) (health * victory);
 		return true;
 	}
 	
@@ -122,6 +129,19 @@ public class Player {
 		
 		current = next;
 		next = null;
+	}
+	
+	private int getItemPower(){
+		/*
+		 * Get last element power,
+		 * or if has no weapons it sets power to 0
+		 */
+		if (items.size() > 0){
+			int power = items.get(items.size()-1).getPower();
+			items.remove(items.size()-1);
+			return power;
+		}
+		return 0;
 	}
 	
 	public Item[] getItems(){

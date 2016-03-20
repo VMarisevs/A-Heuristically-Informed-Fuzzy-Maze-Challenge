@@ -31,16 +31,19 @@ public class Fight {
 		return instance;
 	}
 	
-	public int getVictory(int monsterStrength, int weaponPower, int lifeForce){
+	public double getVictory(int monsterStrength, int weaponPower, int lifeForce){
 				
         fis.setVariable("monster_strength", monsterStrength);
         fis.setVariable("weapon_power", weaponPower);
         fis.setVariable("life_force", lifeForce);
         fis.evaluate();        
         Variable victory = functionBlock.getVariable("victory");
-       // System.out.println("Rule 1 excellent victory : " + victory.getValue());
-		
-		return (int)victory.getValue();
+        
+        System.out.println("Monster strength: " + monsterStrength 
+        			+ " Weapon power: " + weaponPower 
+        			+ " Life force: " + lifeForce);
+		System.out.println("Fight victory result: " + victory.getValue());
+		return victory.getValue();
 	}
 	
 	public static void main(String[] args) {

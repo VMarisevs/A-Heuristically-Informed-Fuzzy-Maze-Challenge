@@ -3,6 +3,7 @@ package ie.gmit.sw.ai;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 
@@ -49,6 +50,7 @@ public class MazeView extends JPanel {
         }
         
         drawCollectedItems(g2);
+        drawPlayersHealth(g2);
         
 	}
 
@@ -61,9 +63,16 @@ public class MazeView extends JPanel {
         
         for (int i = 0; i < items.length && i < 8; i++){
         	int x1 = i * (size+10);
-    		int y1 = MazeView.DEFAULT_VIEW_SIZE;
+    		int y1 = MazeView.DEFAULT_VIEW_SIZE+10;
     		g2.setColor(items[i].getColor());
         	g2.fillRect(x1, y1, size, size);
         }
+	}
+
+	private void drawPlayersHealth(Graphics2D g2){
+		Font f = new Font("Dialog", Font.PLAIN, 20);
+		g2.setFont(f);
+		g2.setColor(Color.WHITE);
+		g2.drawString("HP: " + player.getHealth(), 0,DEFAULT_VIEW_SIZE + 100);
 	}
 }
