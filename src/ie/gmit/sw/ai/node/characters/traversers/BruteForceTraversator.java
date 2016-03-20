@@ -21,7 +21,7 @@ public class BruteForceTraversator implements Traversator{
 			node = queue.poll();
 			node.setVisited(true);
 			
-			if (node.getType() == NodeType.Player){
+			if (node.getPlayer() != null){
 				// we reached the goal!
 				// roll back to next step
 								

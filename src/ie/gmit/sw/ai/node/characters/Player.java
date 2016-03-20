@@ -24,13 +24,24 @@ public class Player {
 		/*
 		 * player will be spawned in left top corner
 		 */
-		Random generator = new Random();
-		int randRow = generator.nextInt(maze.length / 5);
-		int randCol = generator.nextInt(maze[0].length / 5);
 		
-		this.current = maze[randRow][randCol];
-		this.current.setType(NodeType.Player);
-		this.current.setPlayer(this);
+		boolean spawned = false;
+		Random generator = new Random();
+		
+		while(!spawned){
+			/*
+			 * This fix won't let random generator to place
+			 * Player on the wall or any other object
+			 */
+			int randRow = generator.nextInt(maze.length / 5);
+			int randCol = generator.nextInt(maze[0].length / 5);
+			
+			if (maze[randRow][randCol].isEmpty()){
+				this.current = maze[randRow][randCol];
+				this.current.setPlayer(this);
+				spawned = true;
+			}
+		}
 	}
 	
 	public boolean move(Direction dir){
@@ -66,27 +77,20 @@ public class Player {
 		// checking if we can move there
 		if (next != null){
 			
-			switch(next.getType()){
-				case Empty:
-					makeMove(next);
-					break;
-				case Sword:
-				case Gun:
-					makeMove(next);
+			if (!next.isWall()){
+				makeMove(next);
+				
+				if (next.getItem() != null){
+					/*
+					 * collecting item
+					 */
 					Item item = next.getItem();
-					items.add( item);
+					items.add(item);
 					next.setItem(null);
 					System.out.println(item.getType() + " collected. With power " + item.getPower());
-					break;
-				case Exit:
-					makeMove(next);
-					System.out.println("Well done!");
-					game.setGameOver(true);
-					break;
-				case Monster:
-					// destroy monster..
-					makeMove(next);
-					
+				}
+				
+				if (next.getMonster() != null){
 					Monster monster = next.getMonster();
 					monster.setPause(true);
 					
@@ -94,8 +98,12 @@ public class Player {
 						// poisons the thread 
 						monster.setAlive(false);
 					}
-					
-					break;
+				}
+				
+				if (next.isExit()){
+					System.out.println("Well done!");
+					game.setGameOver(true);
+				}
 			}
 			
 		} else{
@@ -122,9 +130,7 @@ public class Player {
 	}
 	
 	private void makeMove(Node next){
-		next.setType(NodeType.Player);
 		next.setPlayer(this);
-		current.setType(NodeType.Empty);
 		current.setPlayer(null);
 		
 		current = next;

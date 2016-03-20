@@ -11,14 +11,12 @@ import ie.gmit.sw.ai.node.items.Item;
 
 public class Node {
 	
-	private NodeType type;
 	private Monster monster;
 	private Player player;
 	private Item item;
+	private boolean wall;
+	private boolean exit;
 	
-	
-	
-	private Color color = Color.BLACK;
 	private int row = -1;
 	private int col = -1;
 	
@@ -30,7 +28,6 @@ public class Node {
 	public Node(int row, int col) {
 		this.row = row;
 		this.col = col;
-		this.type = NodeType.Empty;
 	}
 	
 	// get child nodes
@@ -38,22 +35,24 @@ public class Node {
 		
 		List<Node> children = new ArrayList<Node>();
 		
-		if ((col - 1 >= 0) && maze[row][col - 1].getType() != NodeType.Wall)
+		if ((col - 1 >= 0) 
+				&& !maze[row][col - 1].isWall())
 			children.add(maze[row][col - 1]);
-		if ((col + 1 < maze[row].length) && maze[row][col + 1].getType() != NodeType.Wall)
+		if ((col + 1 < maze[row].length) 
+				&& !maze[row][col + 1].isWall())
 			children.add(maze[row][col + 1]);
-		if ((row - 1 >= 0) && maze[row - 1][col].getType() != NodeType.Wall)
+		if ((row - 1 >= 0) 
+				&& !maze[row - 1][col].isWall())
 			children.add(maze[row - 1][col]);
-		if ((row + 1 < maze.length) && maze[row + 1][col].getType() != NodeType.Wall)
+		if ((row + 1 < maze.length) && 
+				!maze[row + 1][col].isWall())
 			children.add(maze[row + 1][col]);
 
 		// return max 4 children if there is no walls between them 
 		return (Node[])children.toArray(new Node[children.size()]);
 	}
 	
-	public NodeType getType() {
-		return type;
-	}
+
 	public int getRow() {
 		return row;
 	}
@@ -62,32 +61,6 @@ public class Node {
 		return col;
 	}
 
-	public void setType(NodeType type) {
-		this.type = type;
-		switch (type){
-			case Empty:
-				this.color = Color.BLACK;
-				break;
-			case Player:
-				this.color = Color.GREEN;
-				break;
-			case Sword:
-				this.color = Color.YELLOW;
-				break;
-			case Gun:
-				this.color = Color.ORANGE;
-				break;
-			case Monster:
-				this.color = Color.RED;
-				break;
-			case Wall:
-				this.color = Color.LIGHT_GRAY;
-				break;
-			case Exit:
-				this.color = Color.CYAN;
-				break;
-		}
-	}
 	
 	public void setMonster(Monster monster){
 		this.monster = monster;
@@ -128,29 +101,57 @@ public class Node {
 	}
 	
 	public Color getColor() {
+		Color color = Color.BLACK;
+		
+		if (this.isEmpty())
+			color = Color.DARK_GRAY;
+		
+		if (this.getItem() != null){
+			color = item.getColor();
+		}
+		
+		if (this.isExit()){
+			color = Color.MAGENTA;
+		}
+		
+		if (this.monster != null)
+			color = Color.RED;
+		
+		if (this.player != null)
+			color = Color.GREEN;
+		
 		return color;
 	}
-
 	
-	public String toString() {
-		switch(type){
-			case Wall:
-				return "w";
-			case Player:
-				return "p";
-			case Exit:
-				return "e";
-			default:
-				return " ";
-		}
-		/*
-		if (passage == NodePassage.North){
-			return "N ";
-		}else{
-			return "W ";
-		}*/
+	public boolean isWall() {
+		return wall;
+	}
+
+	public void setWall(boolean wall) {
+		this.wall = wall;
 	}
 	
+	public boolean isExit() {
+		return exit;
+	}
+
+	public void setExit(boolean exit) {
+		this.exit = exit;
+	}
+
+	public boolean isEmpty(){
+		// if there is no items or players or monsters or not a wall or exit
+		if (this.monster == null
+			&& this.player == null
+			&& this.item == null			
+			&& this.wall == false
+			&& this.exit == false
+			)return true;
+		
+		return false;
+	}
+
+	// This Heuristic is used for calculating path to a goal node
 	public int getHeuristic(Node goal){
 		double x1 = this.col;
 		double y1 = this.row;

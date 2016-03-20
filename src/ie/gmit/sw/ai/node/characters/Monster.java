@@ -48,9 +48,8 @@ public class Monster implements Runnable {
 			int randRow = generator.nextInt(maze.length);
 			int randCol = generator.nextInt(maze[0].length);
 			
-			if (maze[randRow][randCol].getType() == NodeType.Empty){
+			if (maze[randRow][randCol].isEmpty()){
 				
-				maze[randRow][randCol].setType(NodeType.Monster);
 				current = maze[randRow][randCol];
 				
 				// let the node know about monster inside
@@ -97,24 +96,32 @@ public class Monster implements Runnable {
 					
 					Maze.clearMaze(maze);
 					/*
+					 *  if we have a next move
+					 *  if not, put to sleep so we won't overload the processor
+					 *  
 					 *  if next cell empty making a movement
 					 *  repainting and waiting for 1 sec 
 					 */
-					
-					switch(next.getType()){
-						case Empty:
+					if (next != null){
+						if (!next.isWall()){
 							makeMove(next);
 							moved = true;
-							break;
-						case Player:
-							makeMove(next);
-							pause = true;
-							Player player = next.getPlayer();
-							if (player.fight(this)){
-								alive = false;
+							
+							if (next.getPlayer() != null){
+								pause = true;
+								Player player = next.getPlayer();
+								if (player.fight(this)){
+									alive = false;
+								}
 							}
-							moved = true;
-							break;
+						} 
+						
+					} else{
+						try {
+							Thread.sleep(100);
+						} catch (InterruptedException e) {
+							e.printStackTrace();
+						}
 					}
 					
 				}
@@ -130,13 +137,13 @@ public class Monster implements Runnable {
 		}
 		// kill thread if fight is won
 		System.out.println("Monster poisoned...");
+		current.setMonster(null);
 	}
 	
 	private void makeMove(Node next){
-		next.setType(NodeType.Monster);
+		
 		next.setMonster(this);
 		
-		current.setType(NodeType.Empty);
 		current.setMonster(null);
 		
 		current = next;

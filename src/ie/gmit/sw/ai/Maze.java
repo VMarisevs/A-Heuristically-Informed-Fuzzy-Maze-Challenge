@@ -30,7 +30,7 @@ public class Maze {
 			int col = generator.nextInt(maze[0].length);
 			
 			
-			if (maze[row][col].getType() == NodeType.Empty){
+			if (maze[row][col].isEmpty()){
 				
 				
 				Item item = null;
@@ -44,7 +44,6 @@ public class Maze {
 
 				}
 				
-				maze[row][col].setType(item.getType());
 				maze[row][col].setItem(item);
 						
 				counter++;
@@ -61,8 +60,8 @@ public class Maze {
 			int row = generator.nextInt(maze.length/2) + maze.length/2;
 			int col = generator.nextInt(maze[0].length/2) + maze[0].length/2;
 			
-			if (maze[row][col].getType() == NodeType.Empty){
-				maze[row][col].setType(NodeType.Exit);
+			if (maze[row][col].isEmpty()){
+				maze[row][col].setExit(true);;
 				counter++;
 			}
 		}
@@ -72,7 +71,7 @@ public class Maze {
 		for (int row = 0; row < maze.length; row++){
 			for (int col = 0; col < maze[row].length; col++){
 				maze[row][col] = new Node(row,col);
-				maze[row][col].setType(NodeType.Wall);
+				maze[row][col].setWall(true);
 			}
 			
 		}
@@ -84,11 +83,11 @@ public class Maze {
 			for (int col = 0; col < maze[row].length - 1; col++){
 				int num = (int) (Math.random() * 10);
 				if (num >= 5 && col + 1 < maze[row].length){
-					maze[row][col + 1].setType(NodeType.Empty);
+					maze[row][col + 1].setWall(false);
 					continue;
 				}
 				if (row + 1 < maze.length){ //Check south
-					maze[row + 1][col].setType(NodeType.Empty);
+					maze[row + 1][col].setWall(false);
 				}				
 			}
 		}	
