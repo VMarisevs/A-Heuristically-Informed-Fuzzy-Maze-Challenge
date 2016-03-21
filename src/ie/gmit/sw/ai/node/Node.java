@@ -23,6 +23,8 @@ public class Node {
 	private Map<Monster, Node> parent;
 	private Map<Monster, Boolean> visited;
 	
+	// for radar
+	private boolean radarVisited;
 	// Constructor
 	public Node(int row, int col) {
 		this.row = row;
@@ -106,6 +108,15 @@ public class Node {
 		this.parent.put(me, parent);
 	}
 	
+	
+	public boolean isRadarVisited() {
+		return radarVisited;
+	}
+
+	public void setRadarVisited(boolean radarVisited) {
+		this.radarVisited = radarVisited;
+	}
+
 	public Color getColor() {
 		Color color = Color.BLACK;
 		

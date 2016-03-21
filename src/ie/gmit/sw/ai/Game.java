@@ -36,7 +36,7 @@ public class Game implements KeyListener{
 	private void displayMaze(){
 		// display maze
 		mazeview = new MazeView(maze, player);
-		Dimension dimension = new Dimension(MazeView.DEFAULT_VIEW_SIZE, MazeView.DEFAULT_VIEW_SIZE + 100);
+		Dimension dimension = new Dimension(MazeView.DEFAULT_WINDOW_WIDTH, MazeView.DEFAULT_WINDOW_HEIGHT);
     	mazeview.setPreferredSize(dimension);
     	mazeview.setMinimumSize(dimension);
     	mazeview.setMaximumSize(dimension);
@@ -47,7 +47,7 @@ public class Game implements KeyListener{
         frame.add(mazeview);
         frame.addKeyListener(this);
         frame.setSize(1000,1000);
-        frame.setLocation(100,100);
+        frame.setLocation(200,100);
         frame.pack();
         frame.setVisible(true);
 	}
