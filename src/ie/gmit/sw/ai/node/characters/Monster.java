@@ -113,7 +113,7 @@ public class Monster implements Runnable {
 					 *  repainting and waiting for 1 sec 
 					 */
 					if (next != null){
-						if (!next.isWall()){
+						if (!next.isWall() && next.getMonster() == null){
 							makeMove(next);
 							moved = true;
 							
@@ -128,7 +128,7 @@ public class Monster implements Runnable {
 						
 					} else{
 						try {
-							Thread.sleep(100);
+							Thread.sleep(500);
 						} catch (InterruptedException e) {
 							e.printStackTrace();
 						}

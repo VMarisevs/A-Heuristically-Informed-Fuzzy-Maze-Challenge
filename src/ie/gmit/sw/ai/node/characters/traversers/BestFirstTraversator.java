@@ -27,7 +27,8 @@ public class BestFirstTraversator implements Traversator {
 				// we reached the goal!
 				// roll back to next step
 				
-				while (node.getParent(me).getMonster() != me){
+				while (node.getParent(me) != null &&
+						node.getParent(me).getMonster() != me){
 					node = node.getParent(me);
 				}
 				
