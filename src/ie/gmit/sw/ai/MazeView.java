@@ -12,7 +12,7 @@ import ie.gmit.sw.ai.node.items.Item;
 public class MazeView extends JPanel {
 	private static final long serialVersionUID = 1L;
 	
-	public static final int DEFAULT_WINDOW_WIDTH = 800;
+	public static final int DEFAULT_WINDOW_WIDTH = 900;
 	public static final int DEFAULT_WINDOW_HEIGHT = 700;
 	
 	public static final int DEFAULT_MAZE_SIZE = 600;
@@ -21,7 +21,7 @@ public class MazeView extends JPanel {
 	private Node[][] maze;
 	private Player player;
 	
-	//private boolean zoomOut = true;
+	private boolean zoomOut = true;
 	
 	public MazeView(Node[][] maze, Player player){
 		this.maze = maze;
@@ -30,11 +30,62 @@ public class MazeView extends JPanel {
 		setDoubleBuffered(true);
 	}
 	
+	
+	public boolean isZoomOut() {
+		return zoomOut;
+	}
+
+
+	public void setZoomOut(boolean zoomOut) {
+		this.zoomOut = zoomOut;
+	}
+
+
 	public void paintComponent(Graphics g) {
         super.paintComponent(g);
         Graphics2D g2 = (Graphics2D)g;
         
-        final int size = DEFAULT_MAZE_SIZE/maze.length;
+        
+        if (zoomOut)
+        	drawZoomOutMaze(g2);
+        else
+        	drawZoomInMaze(g2);
+        
+        drawCollectedItems(g2);
+        drawPlayersHealth(g2);
+        
+        drawLifeFormsRadar(g2);
+        
+	}
+
+	private void drawZoomInMaze(Graphics2D g2){
+		final int size = DEFAULT_MAZE_SIZE/7;
+				
+		for (int row = -3; row < 4; row++){
+			for (int col = -3; col < 4; col++){
+				int x = player.getPosition().getCol() + col;
+				int y = player.getPosition().getRow() + row;
+				
+				if ( x < 0 || y < 0 || x >= maze.length || y >= maze[0].length)
+					g2.setColor(Color.BLACK);
+				else
+					g2.setColor(maze[y][x].getColor());
+				
+				x = x - player.getPosition().getCol()+3;
+				y = y - player.getPosition().getRow()+3;
+				
+				x *=size;
+				y *=size;
+
+				g2.fillRect(x, y, size, size);
+			}
+		}
+		
+		
+	}
+	
+	private void drawZoomOutMaze(Graphics2D g2){
+		final int size = DEFAULT_MAZE_SIZE/maze.length;
         
         g2.drawRect(0, 0, MazeView.DEFAULT_MAZE_SIZE, MazeView.DEFAULT_MAZE_SIZE);
         
@@ -49,20 +100,14 @@ public class MazeView extends JPanel {
         		
         	}
         }
-        
-        drawCollectedItems(g2);
-        drawPlayersHealth(g2);
-        
-        drawLifeFormsRadar(g2);
-        
 	}
-
+	
 	private void drawLifeFormsRadar(Graphics2D g2){
 		
 		DepthLimitedDFSRadar dfs = DepthLimitedDFSRadar.getInstance(maze);
 		Node[] lifeDetected = dfs.getLifeForms(player.getPosition());
 		
-		int size = 6;
+		int size = 10;
 		for (int i = 0; i < maze.length; i++){
 			for (int j = 0; j < maze[i].length; j++){
 				int x = i * size + DEFAULT_MAZE_SIZE;
@@ -77,8 +122,13 @@ public class MazeView extends JPanel {
 		for (int i = 0; i < lifeDetected.length; i++){
 			int x = lifeDetected[i].getCol() * size + DEFAULT_MAZE_SIZE;
 			int y = lifeDetected[i].getRow() * size;
-			g2.fillRect(x, y, size, size);
+			g2.fillOval(x, y, size, size);
 		}
+		
+		g2.setColor(Color.GREEN);
+		int x = player.getPosition().getCol() * size + DEFAULT_MAZE_SIZE;
+		int y = player.getPosition().getRow() * size;
+		g2.fillOval(x, y, size, size);
 		//System.out.println("Lifes Detected: " + lifeDetected.length);
 	}
 	

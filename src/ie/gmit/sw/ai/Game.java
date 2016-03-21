@@ -11,7 +11,7 @@ import ie.gmit.sw.ai.node.characters.*;
 public class Game implements KeyListener{
 	private Node[][] maze;
 	private Player player;
-	private Component mazeview;
+	private MazeView mazeview;
 	private boolean gameOver = false;
 	private Monster[] monsters = new Monster[3];
 	
@@ -100,6 +100,12 @@ public class Game implements KeyListener{
 				case KeyEvent.VK_D:
 					System.out.println("move right");
 					player.move(Direction.Right);
+					break;
+				case KeyEvent.VK_Z:
+					if (mazeview.isZoomOut())
+						mazeview.setZoomOut(false);
+					else
+						mazeview.setZoomOut(true);
 					break;
 			}
 		mazeview.repaint();
