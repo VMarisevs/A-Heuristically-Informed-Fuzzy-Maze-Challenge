@@ -1,8 +1,7 @@
 package ie.gmit.sw.ai.node;
 
 import java.awt.Color;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 import ie.gmit.sw.ai.node.characters.Monster;
 import ie.gmit.sw.ai.node.characters.Player;
@@ -21,13 +20,16 @@ public class Node {
 	private int col = -1;
 	
 	// for traversator
-	private Node parent;
-	private boolean visited;
+	private Map<Monster, Node> parent;
+	private Map<Monster, Boolean> visited;
 	
 	// Constructor
 	public Node(int row, int col) {
 		this.row = row;
 		this.col = col;
+		
+		parent = new HashMap<Monster, Node>();
+		visited = new HashMap<Monster,Boolean>();
 	}
 	
 	// get child nodes
@@ -86,18 +88,22 @@ public class Node {
 		this.item = item;
 	}
 
-	public boolean isVisited() {
+	public boolean isVisited(Monster me) {
+		boolean visited = false;
+		if (this.visited.containsKey(me))
+			visited = this.visited.get(me);
 		return visited;
 	}
-	public void setVisited(boolean visited) {
-		this.visited = visited;
+
+	public void setVisited(Monster me, boolean visited){
+		this.visited.put(me, visited);
 	}
 	
-	public Node getParent() {
-		return parent;
+	public Node getParent(Monster me) {
+		return this.parent.get(me);
 	}
-	public void setParent(Node parent) {
-		this.parent = parent;
+	public void setParent(Monster me, Node parent) {
+		this.parent.put(me, parent);
 	}
 	
 	public Color getColor() {
@@ -159,4 +165,8 @@ public class Node {
 		double y2 = goal.getRow();
 		return (int) Math.sqrt(Math.pow((x2 - x1), 2) + Math.pow((y2 - y1), 2));
 	}
+	
+	//public void clearVisited(){
+	//	this.visited.clear();
+	//}
 }

@@ -3,6 +3,7 @@ package ie.gmit.sw.ai;
 import java.util.Random;
 
 import ie.gmit.sw.ai.node.Node;
+import ie.gmit.sw.ai.node.characters.Monster;
 import ie.gmit.sw.ai.node.items.*;
 
 public class Maze {
@@ -108,15 +109,17 @@ public class Maze {
 		return sb.toString();
 	}
 
-	public static void clearMaze(Node[][] maze){
+
+	public static void clearMaze(Node[][] maze, Monster me){
 		int explored = 0;
 		for (int i = 0; i < maze.length; i++){
 			for (int j = 0; j < maze[i].length; j++){
-				if (maze[i][j].isVisited())
+				if (maze[i][j].isVisited(me))
 					explored++;
-				maze[i][j].setVisited(false);
+				maze[i][j].setVisited(me, false);
 			}
 		}
 		System.out.println("Nodes explored: " + explored);
 	}
+
 }

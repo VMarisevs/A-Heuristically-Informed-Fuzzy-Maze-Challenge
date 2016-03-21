@@ -104,7 +104,7 @@ public class Monster implements Runnable {
 					
 					Node next = new BestFirstTraversator(player.getPosition()).traverse(maze, current, this);
 					
-					Maze.clearMaze(maze);
+					Maze.clearMaze(maze, this);
 					/*
 					 *  if we have a next move
 					 *  if not, put to sleep so we won't overload the processor
