@@ -152,11 +152,18 @@ public class MazeView extends JPanel {
         g2.fillRect(0,MazeView.DEFAULT_MAZE_SIZE,MazeView.DEFAULT_MAZE_SIZE,100);
         
         Item[] items = player.getItems();
-        final int size = DEFAULT_MAZE_SIZE/10;
+        //final int size = DEFAULT_MAZE_SIZE/10;
+        
+        final int size = 85;
         
         for (int i = 0; i < items.length && i < 8; i++){
         	int x1 = i * (size+10);
     		int y1 = MazeView.DEFAULT_MAZE_SIZE+10;
+    		
+    		if (player.getCurrentItem() == i){
+    			g2.setColor(Color.ORANGE);
+    			g2.fillRect(x1, y1, size, size);
+    		}
     		
     		g2.drawImage(items[i].getWeapon(), x1,y1, null);
     		//g2.setColor(items[i].getColor());

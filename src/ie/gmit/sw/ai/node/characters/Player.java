@@ -12,6 +12,7 @@ public class Player {
 	private Node current;
 	private Node[][] maze;
 	private Game game;
+	private int currentItem = -1;
 	private List<Item> items = new ArrayList<Item>();
 	
 	private int health;
@@ -85,6 +86,10 @@ public class Player {
 					 */
 					Item item = next.getItem();
 					items.add(item);
+					if (items.size() == 1 )
+						currentItem = 0;
+					
+					// removing from node, because it was collected
 					next.setItem(null);
 					System.out.println(item.toString() + " collected. With power " + item.getPower());
 				}
@@ -154,6 +159,23 @@ public class Player {
 	}
 
 	
+	
+	public int getCurrentItem() {
+		return currentItem;
+	}
+
+	public void setNextCurrentItem() {
+		// increasing item id
+		if (currentItem < items.size()-1)
+			currentItem++;
+	}
+	
+	public void setPreviousCurrentItem() {
+		// increasing item id
+		if (currentItem > 0)
+			currentItem--;
+	}
+
 	public int getHealth() {
 		return health;
 	}

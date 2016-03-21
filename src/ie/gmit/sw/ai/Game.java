@@ -107,6 +107,12 @@ public class Game implements KeyListener{
 					else
 						mazeview.setZoomOut(true);
 					break;
+				case KeyEvent.VK_OPEN_BRACKET:
+					player.setPreviousCurrentItem();
+					break;
+				case KeyEvent.VK_CLOSE_BRACKET:
+					player.setNextCurrentItem();
+					break;
 			}
 		mazeview.repaint();
 		
