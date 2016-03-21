@@ -1,6 +1,7 @@
 package ie.gmit.sw.ai;
 
 import java.awt.*;
+import java.awt.image.BufferedImage;
 
 import javax.swing.JPanel;
 
@@ -8,6 +9,7 @@ import ie.gmit.sw.ai.node.Node;
 import ie.gmit.sw.ai.node.characters.Player;
 import ie.gmit.sw.ai.node.characters.radar.DepthLimitedDFSRadar;
 import ie.gmit.sw.ai.node.items.Item;
+import ie.gmit.sw.resources.Resources;
 
 public class MazeView extends JPanel {
 	private static final long serialVersionUID = 1L;
@@ -20,6 +22,7 @@ public class MazeView extends JPanel {
 	
 	private Node[][] maze;
 	private Player player;
+	private Resources resources;
 	
 	private boolean zoomOut = true;
 	
@@ -28,6 +31,7 @@ public class MazeView extends JPanel {
 		this.player = player;
 		setBackground(Color.BLACK);
 		setDoubleBuffered(true);
+		resources = Resources.getInstance();
 	}
 	
 	
@@ -66,18 +70,29 @@ public class MazeView extends JPanel {
 				int x = player.getPosition().getCol() + col;
 				int y = player.getPosition().getRow() + row;
 				
+				BufferedImage img = null;
 				if ( x < 0 || y < 0 || x >= maze.length || y >= maze[0].length)
 					g2.setColor(Color.BLACK);
-				else
+				else{
 					g2.setColor(maze[y][x].getColor());
+					
+					if (maze[y][x].getItem() != null)
+						img = maze[y][x].getItem().getWeapon();
+				}
+					
 				
 				x = x - player.getPosition().getCol()+3;
 				y = y - player.getPosition().getRow()+3;
 				
 				x *=size;
 				y *=size;
-
+				
 				g2.fillRect(x, y, size, size);
+				
+				if (img != null)
+					g2.drawImage(img,x,y, null);
+					
+			
 			}
 		}
 		
@@ -142,8 +157,10 @@ public class MazeView extends JPanel {
         for (int i = 0; i < items.length && i < 8; i++){
         	int x1 = i * (size+10);
     		int y1 = MazeView.DEFAULT_MAZE_SIZE+10;
-    		g2.setColor(items[i].getColor());
-        	g2.fillRect(x1, y1, size, size);
+    		
+    		g2.drawImage(items[i].getWeapon(), x1,y1, null);
+    		//g2.setColor(items[i].getColor());
+        	//g2.fillRect(x1, y1, size, size);
         }
 	}
 
