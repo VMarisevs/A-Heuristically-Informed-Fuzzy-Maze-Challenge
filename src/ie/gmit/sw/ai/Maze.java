@@ -34,12 +34,15 @@ public class Maze {
 				
 				
 				Item item = null;
-				switch (new Random().nextInt(2)) {
+				switch (new Random().nextInt(3)) {
 				case 0:
-					item = new Sword(maze[row][col]);
+					item = new Sword();
 					break;
 				case 1:
-					item = new Gun(maze[row][col]);
+					item = new Gun();
+					break;
+				case 2:
+					item = new Grenade();
 					break;
 
 				}

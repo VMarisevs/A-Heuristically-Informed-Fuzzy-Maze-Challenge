@@ -4,12 +4,10 @@ import java.awt.Color;
 import java.awt.image.BufferedImage;
 import java.util.Random;
 
-import ie.gmit.sw.ai.node.Node;
-
 public class Sword extends Item {
 
 
-	public Sword(Node position) {
+	public Sword() {
 		this.setPower(new Random().nextInt(4) +2);
 		this.setColor(Color.YELLOW);
 		this.setImage(this.getResources().getSword());
