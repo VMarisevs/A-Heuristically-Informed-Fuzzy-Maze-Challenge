@@ -147,8 +147,8 @@ public class Player {
 		 * or if has no weapons it sets power to 0
 		 */
 		if (items.size() > 0){
-			int power = items.get(items.size()-1).getPower();
-			items.remove(items.size()-1);
+			int power = items.get(currentItem).getPower();
+			items.remove(currentItem);
 			return power;
 		}
 		return 0;
