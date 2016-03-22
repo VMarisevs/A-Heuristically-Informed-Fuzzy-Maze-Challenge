@@ -113,6 +113,9 @@ public class Game implements KeyListener{
 				case KeyEvent.VK_CLOSE_BRACKET:
 					player.setNextCurrentItem();
 					break;
+				case KeyEvent.VK_E:
+					player.plantBomb();
+					break;
 			}
 		mazeview.repaint();
 		

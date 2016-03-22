@@ -9,7 +9,6 @@ import ie.gmit.sw.ai.node.Node;
 import ie.gmit.sw.ai.node.characters.Player;
 import ie.gmit.sw.ai.node.characters.radar.DepthLimitedDFSRadar;
 import ie.gmit.sw.ai.node.items.Item;
-import ie.gmit.sw.resources.Resources;
 
 public class MazeView extends JPanel {
 	private static final long serialVersionUID = 1L;
@@ -22,7 +21,6 @@ public class MazeView extends JPanel {
 	
 	private Node[][] maze;
 	private Player player;
-	private Resources resources;
 	
 	private boolean zoomOut = true;
 	
@@ -31,7 +29,6 @@ public class MazeView extends JPanel {
 		this.player = player;
 		setBackground(Color.BLACK);
 		setDoubleBuffered(true);
-		resources = Resources.getInstance();
 	}
 	
 	

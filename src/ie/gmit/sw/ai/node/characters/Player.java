@@ -5,7 +5,9 @@ import java.util.*;
 import ie.gmit.sw.ai.Game;
 import ie.gmit.sw.ai.jfuzzy.Fight;
 import ie.gmit.sw.ai.node.Node;
+import ie.gmit.sw.ai.node.items.Bomb;
 import ie.gmit.sw.ai.node.items.Item;
+import ie.gmit.sw.ai.node.items.bomb.Explosion;
 
 public class Player {
 	
@@ -149,6 +151,7 @@ public class Player {
 		if (items.size() > 0){
 			int power = items.get(currentItem).getPower();
 			items.remove(currentItem);
+			setPreviousCurrentItem();
 			return power;
 		}
 		return 0;
@@ -171,9 +174,12 @@ public class Player {
 	}
 	
 	public void setPreviousCurrentItem() {
-		// increasing item id
+		// decreasing item id
 		if (currentItem > 0)
 			currentItem--;
+		// if no items, set as -1 
+		if (items.size() == 0)
+			currentItem = -1;
 	}
 
 	public int getHealth() {
@@ -188,5 +194,19 @@ public class Player {
 		return this.current;
 	}
 	
-	
+	public void plantBomb(){
+		/*
+		 *  if the bomb is selected
+		 *  we can plant it
+		 */
+		if (this.items.get(this.currentItem) instanceof Bomb){
+			System.out.println("Bomb planted");
+			Bomb bomb = (Bomb)this.items.get(this.currentItem);
+			
+			new Thread(new Explosion(maze, bomb, current)).start();
+			
+			// this just removes the bomb after it was used
+			getItemPower();
+		}
+	}
 }

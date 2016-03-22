@@ -5,6 +5,7 @@ import java.util.*;
 
 import ie.gmit.sw.ai.node.characters.Monster;
 import ie.gmit.sw.ai.node.characters.Player;
+import ie.gmit.sw.ai.node.items.Bomb;
 import ie.gmit.sw.ai.node.items.Item;
 
 
@@ -25,6 +26,10 @@ public class Node {
 	
 	// for radar
 	private boolean radarVisited;
+	
+	// for bomb
+	private Map<Bomb, Boolean> bombVisited;
+	
 	// Constructor
 	public Node(int row, int col) {
 		this.row = row;
@@ -32,6 +37,7 @@ public class Node {
 		
 		parent = new HashMap<Monster, Node>();
 		visited = new HashMap<Monster,Boolean>();
+		bombVisited = new HashMap<Bomb,Boolean>();
 	}
 	
 	// get child nodes
@@ -99,6 +105,17 @@ public class Node {
 
 	public void setVisited(Monster me, boolean visited){
 		this.visited.put(me, visited);
+	}
+	
+	public boolean isVisited(Bomb current){
+		boolean visited = false;
+		if (this.bombVisited.containsKey(current))
+			visited = this.bombVisited.get(current);
+		return visited;
+	}
+	
+	public void setVisited(Bomb current, boolean visited){
+		this.bombVisited.put(current, visited);
 	}
 	
 	public Node getParent(Monster me) {

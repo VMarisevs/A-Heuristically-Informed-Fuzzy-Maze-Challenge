@@ -5,10 +5,12 @@ import java.awt.image.BufferedImage;
 
 public class Grenade extends Bomb{
 
+	private static final int DEPTH = 3;
 	public Grenade() {
 		this.setPower(0);
 		this.setColor(Color.CYAN);
 		this.setImage(this.getResources().getGrenade());
+		this.setDepth(DEPTH);
 	}
 	
 	@Override
