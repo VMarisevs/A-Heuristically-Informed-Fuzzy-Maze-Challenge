@@ -34,7 +34,7 @@ public class Maze {
 				
 				
 				Item item = null;
-				switch (new Random().nextInt(4)) {
+				switch (new Random().nextInt(5)) {
 				case 0:
 					item = new Sword();
 					break;
@@ -47,6 +47,8 @@ public class Maze {
 				case 3:
 					item = new ABomb();
 					break;
+				case 4:
+					item = new Clue();
 
 				}
 				
