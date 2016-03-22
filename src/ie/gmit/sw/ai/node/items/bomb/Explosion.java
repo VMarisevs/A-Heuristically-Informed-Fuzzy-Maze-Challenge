@@ -1,5 +1,6 @@
 package ie.gmit.sw.ai.node.items.bomb;
 
+import ie.gmit.sw.ai.UpdateView;
 import ie.gmit.sw.ai.node.Node;
 import ie.gmit.sw.ai.node.items.Bomb;
 
@@ -32,5 +33,6 @@ public class Explosion implements Runnable{
 		dlbomb.killLifeForms(start);
 		
 		start.setImage(null);
+		UpdateView.getInstance().repaint();
 	}
 }

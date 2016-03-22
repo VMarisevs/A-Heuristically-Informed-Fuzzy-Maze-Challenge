@@ -29,6 +29,8 @@ public class MazeView extends JPanel {
 		this.player = player;
 		setBackground(Color.BLACK);
 		setDoubleBuffered(true);
+		
+		UpdateView.getInstance().setView(this);
 	}
 	
 	

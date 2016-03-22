@@ -1,5 +1,6 @@
 package ie.gmit.sw.ai.node.items.bomb;
 
+import ie.gmit.sw.ai.UpdateView;
 import ie.gmit.sw.ai.node.Node;
 import ie.gmit.sw.ai.node.characters.Monster;
 import ie.gmit.sw.ai.node.characters.Player;
@@ -48,6 +49,8 @@ public class DepthLimitedDFSBomb {
 				depthLimitedDFS(children[i], depth + 1);
 			}
 		}
+		
+		UpdateView.getInstance().repaint();
 	}
 	
 	private void kill(Node current){
