@@ -164,7 +164,7 @@ public class Node {
 			color = Color.RED;
 		
 		if (this.player != null)
-			color = Color.GREEN;
+			color = Color.DARK_GRAY;
 		
 		return color;
 	}

@@ -31,6 +31,7 @@ public class Player {
 		/*
 		 * player will be spawned in left top corner
 		 */
+		setImage(Resources.getInstance().getDragonUp0());
 		
 		boolean spawned = false;
 		Random generator = new Random();
