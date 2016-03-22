@@ -16,7 +16,7 @@ public class Maze {
 		init();
 		buildMaze();
 		
-		spawnItems((int)((rows * cols) * 0.01));
+		spawnItems((int)((rows * cols) * 0.02));
 		generateExit(1);
 	}
 	
@@ -34,7 +34,7 @@ public class Maze {
 				
 				
 				Item item = null;
-				switch (new Random().nextInt(3)) {
+				switch (new Random().nextInt(4)) {
 				case 0:
 					item = new Sword();
 					break;
@@ -43,6 +43,9 @@ public class Maze {
 					break;
 				case 2:
 					item = new Grenade();
+					break;
+				case 3:
+					item = new ABomb();
 					break;
 
 				}

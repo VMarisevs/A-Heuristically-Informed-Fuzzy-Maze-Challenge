@@ -3,17 +3,18 @@ package ie.gmit.sw.ai.node.items;
 import java.awt.Color;
 import java.awt.image.BufferedImage;
 
-public class Grenade extends Bomb{
+public class ABomb extends Bomb {
 
-	private static final int DEPTH = 3;
-	public Grenade() {
-		this.setPower(6);
-		this.setColor(Color.CYAN);
-		this.setImage(this.getResources().getGrenade());
-		this.setDepth(DEPTH);
-		this.setActivated(this.getResources().getActivatedGrenade());
-	}
+	private static final int DEPTH = 10;
 	
+	public ABomb() {
+		this.setPower(6);
+		this.setColor(Color.BLUE);
+		this.setImage(this.getResources().getAbomb());
+		this.setDepth(DEPTH);
+		this.setActivated(this.getResources().getActivatedAbomb());
+	}
+
 	@Override
 	public BufferedImage getWeapon() {
 		return this.getImage();
@@ -21,7 +22,6 @@ public class Grenade extends Bomb{
 
 	@Override
 	public String toString() {
-		return "Grenade";
+		return "A-Bomb";
 	}
-
 }
