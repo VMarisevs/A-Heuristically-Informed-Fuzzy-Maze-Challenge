@@ -75,6 +75,9 @@ public class MazeView extends JPanel {
 					
 					if (maze[y][x].getItem() != null)
 						img = maze[y][x].getItem().getWeapon();
+					
+					if (maze[y][x].getImage() != null)
+						img = maze[y][x].getImage();
 				}
 					
 				

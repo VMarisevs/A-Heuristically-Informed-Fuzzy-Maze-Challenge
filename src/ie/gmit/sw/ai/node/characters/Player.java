@@ -160,8 +160,6 @@ public class Player {
 	public Item[] getItems(){
 		return items.toArray(new Item[items.size()]);
 	}
-
-	
 	
 	public int getCurrentItem() {
 		return currentItem;
@@ -201,9 +199,11 @@ public class Player {
 		 */
 		if (this.items.get(this.currentItem) instanceof Bomb){
 			System.out.println("Bomb planted");
-			Bomb bomb = (Bomb)this.items.get(this.currentItem);
+			Bomb bomb = (Bomb)this.items.get(this.currentItem);			
+			
 			
 			new Thread(new Explosion(maze, bomb, current)).start();
+			
 			
 			// this just removes the bomb after it was used
 			getItemPower();

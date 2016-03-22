@@ -4,13 +4,18 @@ import ie.gmit.sw.ai.node.Node;
 import ie.gmit.sw.ai.node.characters.Monster;
 import ie.gmit.sw.ai.node.characters.Player;
 import ie.gmit.sw.ai.node.items.Bomb;
+import ie.gmit.sw.resources.Resources;
 
 public class DepthLimitedDFSBomb {
 
+	private static final int KEEP_FIRE_IMAGE = 1000;
+	
 	private Node[][] maze;
 	private Bomb current;
+	private Resources resources;
 	
 	public DepthLimitedDFSBomb(Node[][] maze, Bomb current) {
+		this.resources = Resources.getInstance();
 		this.maze = maze;
 		this.current = current;
 	}
@@ -19,6 +24,11 @@ public class DepthLimitedDFSBomb {
 		
 		depthLimitedDFS(start, 1);
 		
+		try {
+			Thread.sleep(KEEP_FIRE_IMAGE);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
 		clearNodes();
 	}
 	
@@ -28,6 +38,8 @@ public class DepthLimitedDFSBomb {
 		node.setVisited(current, true);
 		
 		kill(node);
+		
+		node.setImage(resources.getExplosion());
 		
 		Node[] children = node.getChildren(maze);
 		
@@ -56,8 +68,10 @@ public class DepthLimitedDFSBomb {
 	private void clearNodes(){
 		for (int i = 0; i < maze.length; i++ ){
 			for (int j = 0; j < maze[i].length; j++){
-				if (maze[i][j].isVisited(current))
+				if (maze[i][j].isVisited(current)){
 					maze[i][j].setVisited(current, false);
+					maze[i][j].setImage(null);
+				}
 			}
 		}
 	}

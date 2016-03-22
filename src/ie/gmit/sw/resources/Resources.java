@@ -22,7 +22,7 @@ public class Resources {
 		return instance;
 	}
 	
-	private static final int IMAGE_COUNT = 3;
+	private static final int IMAGE_COUNT = 5;
 	private BufferedImage[] images;
 	
 	private Resources() throws IOException {
@@ -30,6 +30,8 @@ public class Resources {
 		images[0] = ImageIO.read(new java.io.File("resources/gun.png"));
 		images[1] = ImageIO.read(new java.io.File("resources/sword.png"));
 		images[2] = ImageIO.read(new java.io.File("resources/grenade.png"));
+		images[3] = ImageIO.read(new java.io.File("resources/active_grenade.png"));
+		images[4] = ImageIO.read(new java.io.File("resources/explosion.png"));
 	}
 	
 	public BufferedImage getGun(){
@@ -42,5 +44,13 @@ public class Resources {
 	
 	public BufferedImage getGrenade(){
 		return images[2];
+	}
+	
+	public BufferedImage getActivatedGrenade(){
+		return images[3];
+	}
+	
+	public BufferedImage getExplosion(){
+		return images[4];
 	}
 }

@@ -17,11 +17,12 @@ public class Explosion implements Runnable{
 
 	@Override
 	public void run() {
+		start.setImage(current.getActivated());
 		/*
 		 * delay before explosion
 		 */
 		try {
-			Thread.sleep(1000);
+			Thread.sleep(current.getDelay());
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
@@ -30,5 +31,6 @@ public class Explosion implements Runnable{
 		
 		dlbomb.killLifeForms(start);
 		
+		start.setImage(null);
 	}
 }

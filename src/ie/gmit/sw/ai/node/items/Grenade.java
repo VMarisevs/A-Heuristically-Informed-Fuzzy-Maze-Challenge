@@ -11,6 +11,7 @@ public class Grenade extends Bomb{
 		this.setColor(Color.CYAN);
 		this.setImage(this.getResources().getGrenade());
 		this.setDepth(DEPTH);
+		this.setActivated(this.getResources().getActivatedGrenade());
 	}
 	
 	@Override

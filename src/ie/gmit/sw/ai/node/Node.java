@@ -1,6 +1,7 @@
 package ie.gmit.sw.ai.node;
 
 import java.awt.Color;
+import java.awt.image.BufferedImage;
 import java.util.*;
 
 import ie.gmit.sw.ai.node.characters.Monster;
@@ -16,6 +17,8 @@ public class Node {
 	private Item item;
 	private boolean wall;
 	private boolean exit;
+	
+	private BufferedImage image;
 	
 	private int row = -1;
 	private int col = -1;
@@ -132,6 +135,15 @@ public class Node {
 
 	public void setRadarVisited(boolean radarVisited) {
 		this.radarVisited = radarVisited;
+	}
+
+	
+	public BufferedImage getImage() {
+		return image;
+	}
+
+	public void setImage(BufferedImage image) {
+		this.image = image;
 	}
 
 	public Color getColor() {
