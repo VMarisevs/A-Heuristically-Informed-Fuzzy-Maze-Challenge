@@ -93,11 +93,15 @@ public class MazeView extends JPanel {
 				x *=size;
 				y *=size;
 				
-				g2.fillRect(x, y, size, size);
 				
-				if (img != null)
+				
+				if (img != null){
+					g2.setColor(Color.DARK_GRAY);
+					g2.fillRect(x, y, size, size);
 					g2.drawImage(img,x,y, null);
 					
+				}else				
+					g2.fillRect(x, y, size, size);
 			
 			}
 		}
