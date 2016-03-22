@@ -1,11 +1,13 @@
 package ie.gmit.sw.ai.node.characters;
 
 import java.awt.Component;
+import java.awt.image.BufferedImage;
 import java.util.Random;
 
 import ie.gmit.sw.ai.Maze;
 import ie.gmit.sw.ai.node.Node;
 import ie.gmit.sw.ai.node.characters.traversers.*;
+import ie.gmit.sw.resources.Resources;
 
 public class Monster implements Runnable {
 
@@ -17,7 +19,10 @@ public class Monster implements Runnable {
 	private boolean pause = false;
 	private int strength;
 	
+	private boolean previousstep = false;
+	
 	private Component view;
+	private BufferedImage image;
 	
 	public Monster(Node[][] maze,Player player, Component view) {
 		this.maze = maze;
@@ -29,7 +34,8 @@ public class Monster implements Runnable {
 	}
 	
 	@Override
-	public void run() {
+	public void 
+	run() {
 		move();		
 	}
 
@@ -114,6 +120,36 @@ public class Monster implements Runnable {
 					 */
 					if (next != null){
 						if (!next.isWall() && next.getMonster() == null){
+							
+							if (current.getRow() == next.getRow() && current.getCol() < next.getCol()){
+								if (isPreviousstep())
+									image = Resources.getInstance().getDevilRight0();
+								else
+									image = Resources.getInstance().getDevilRight1();
+								
+							} else if (current.getRow() == next.getRow() && current.getCol() > next.getCol()){
+								if (isPreviousstep())
+									image = Resources.getInstance().getDevilLeft0();
+								else
+									image = Resources.getInstance().getDevilLeft1();
+								
+							}else if (current.getRow() < next.getRow() && current.getCol() == next.getCol()){
+								if (isPreviousstep())
+									image = Resources.getInstance().getDevilDown0();
+								else
+									image = Resources.getInstance().getDevilDown1();
+								
+							}else if (current.getRow() > next.getRow() && current.getCol() == next.getCol()){
+								if (isPreviousstep())
+									image = Resources.getInstance().getDevilUp0();
+								else
+									image = Resources.getInstance().getDevilUp1();
+							}
+								
+							
+							/*
+							 * making a move
+							 */
 							makeMove(next);
 							moved = true;
 							
@@ -140,7 +176,7 @@ public class Monster implements Runnable {
 			}
 				
 			try {
-				Thread.sleep(1000);
+				Thread.sleep(500);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
@@ -160,9 +196,24 @@ public class Monster implements Runnable {
 		next = null;
 	}
 
+	private boolean isPreviousstep() {
+		/*
+		 * let switch between animation if player make a step into same side twice
+		 */
+		if (previousstep)
+			previousstep = false;
+		else
+			previousstep = true;
+		return previousstep;
+	}
 	
 	public int getStrength() {
 		return strength;
+	}
+
+	
+	public BufferedImage getImage() {
+		return image;
 	}
 	
 }

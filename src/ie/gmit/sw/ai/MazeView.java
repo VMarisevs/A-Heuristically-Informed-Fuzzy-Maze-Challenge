@@ -82,6 +82,10 @@ public class MazeView extends JPanel {
 					if (maze[y][x].getImage() != null)
 						img = maze[y][x].getImage();
 					
+					if (maze[y][x].getMonster() != null){
+						img = maze[y][x].getMonster().getImage();
+					}
+					
 					if (maze[y][x].getPlayer() != null){
 						img = maze[y][x].getPlayer().getImage();
 					}

@@ -22,7 +22,7 @@ public class Resources {
 		return instance;
 	}
 	
-	private static final int IMAGE_COUNT = 15;
+	private static final int IMAGE_COUNT = 23;
 	private BufferedImage[] images;
 	
 	private Resources() throws IOException {
@@ -43,6 +43,15 @@ public class Resources {
 		images[12] = ImageIO.read(new java.io.File("resources/dragon/dragon_right_1.png"));
 		images[13] = ImageIO.read(new java.io.File("resources/dragon/dragon_up_0.png"));
 		images[14] = ImageIO.read(new java.io.File("resources/dragon/dragon_up_1.png"));
+		
+		images[15] = ImageIO.read(new java.io.File("resources/devil/devil_down_0.png"));
+		images[16] = ImageIO.read(new java.io.File("resources/devil/devil_down_1.png"));
+		images[17] = ImageIO.read(new java.io.File("resources/devil/devil_left_0.png"));
+		images[18] = ImageIO.read(new java.io.File("resources/devil/devil_left_1.png"));
+		images[19] = ImageIO.read(new java.io.File("resources/devil/devil_right_0.png"));
+		images[20] = ImageIO.read(new java.io.File("resources/devil/devil_right_1.png"));
+		images[21] = ImageIO.read(new java.io.File("resources/devil/devil_up_0.png"));
+		images[22] = ImageIO.read(new java.io.File("resources/devil/devil_up_1.png"));
 	}
 	
 	public BufferedImage getGun(){
@@ -81,4 +90,13 @@ public class Resources {
 	public BufferedImage getDragonRight1(){return images[12];}
 	public BufferedImage getDragonUp0(){return images[13];}
 	public BufferedImage getDragonUp1(){return images[14];}
+	
+	public BufferedImage getDevilDown0(){return images[15];}
+	public BufferedImage getDevilDown1(){return images[16];}
+	public BufferedImage getDevilLeft0(){return images[17];}
+	public BufferedImage getDevilLeft1(){return images[18];}
+	public BufferedImage getDevilRight0(){return images[19];}
+	public BufferedImage getDevilRight1(){return images[20];}
+	public BufferedImage getDevilUp0(){return images[21];}
+	public BufferedImage getDevilUp1(){return images[22];}
 }
