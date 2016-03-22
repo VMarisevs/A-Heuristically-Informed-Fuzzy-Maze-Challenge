@@ -68,6 +68,7 @@ public class MazeView extends JPanel {
 				int y = player.getPosition().getRow() + row;
 				
 				BufferedImage img = null;
+				
 				if ( x < 0 || y < 0 || x >= maze.length || y >= maze[0].length)
 					g2.setColor(Color.BLACK);
 				else{
@@ -78,6 +79,11 @@ public class MazeView extends JPanel {
 					
 					if (maze[y][x].getImage() != null)
 						img = maze[y][x].getImage();
+					
+					if (maze[y][x].getPlayer() != null){
+						img = maze[y][x].getPlayer().getImage();
+					}
+					
 				}
 					
 				

@@ -1,5 +1,6 @@
 package ie.gmit.sw.ai.node.characters;
 
+import java.awt.image.BufferedImage;
 import java.util.*;
 
 import ie.gmit.sw.ai.Game;
@@ -8,8 +9,12 @@ import ie.gmit.sw.ai.node.Node;
 import ie.gmit.sw.ai.node.items.Bomb;
 import ie.gmit.sw.ai.node.items.Item;
 import ie.gmit.sw.ai.node.items.bomb.Explosion;
+import ie.gmit.sw.resources.Resources;
 
 public class Player {
+	
+	private boolean previousstep = false;
+	private BufferedImage image;
 	
 	private Node current;
 	private Node[][] maze;
@@ -80,6 +85,34 @@ public class Player {
 		if (next != null){
 			
 			if (!next.isWall()){
+				// sets the image
+				switch (dir) {
+					case Up:
+						if(isPreviousstep())
+							setImage(Resources.getInstance().getDragonUp0());
+						else
+							setImage(Resources.getInstance().getDragonUp1());
+						break;
+					case Down:
+						if(isPreviousstep())
+							setImage(Resources.getInstance().getDragonDown0());
+						else
+							setImage(Resources.getInstance().getDragonDown1());
+						break;
+					case Left:
+						if(isPreviousstep())
+							setImage(Resources.getInstance().getDragonLeft0());
+						else
+							setImage(Resources.getInstance().getDragonLeft1());
+						break;
+					case Right:
+						if(isPreviousstep())
+							setImage(Resources.getInstance().getDragonRight0());
+						else
+							setImage(Resources.getInstance().getDragonRight1());
+						break;
+				}
+				
 				makeMove(next);
 				
 				if (next.getItem() != null){
@@ -110,6 +143,9 @@ public class Player {
 					System.out.println("Well done!");
 					game.setGameOver(true);
 				}
+
+
+				
 			}
 			
 		} else{
@@ -209,4 +245,26 @@ public class Player {
 			getItemPower();
 		}
 	}
+
+	public boolean isPreviousstep() {
+		/*
+		 * let switch between animation if player make a step into same side twice
+		 */
+		if (previousstep)
+			previousstep = false;
+		else
+			previousstep = true;
+		return previousstep;
+	}
+
+	public BufferedImage getImage() {
+		return image;
+	}
+
+	private void setImage(BufferedImage image) {
+		this.image = image;
+	}
+	
+	
+	
 }
