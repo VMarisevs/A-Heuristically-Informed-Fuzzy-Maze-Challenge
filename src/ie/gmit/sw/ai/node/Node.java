@@ -7,6 +7,7 @@ import java.util.*;
 import ie.gmit.sw.ai.node.characters.Monster;
 import ie.gmit.sw.ai.node.characters.Player;
 import ie.gmit.sw.ai.node.items.Bomb;
+import ie.gmit.sw.ai.node.items.Clue;
 import ie.gmit.sw.ai.node.items.Item;
 
 
@@ -33,6 +34,12 @@ public class Node {
 	// for bomb
 	private Map<Bomb, Boolean> bombVisited;
 	
+	// for path helper
+	private int pathCost;
+	
+	private Map<Clue, Node> clueParent;
+	private Map<Clue, Boolean> clueVisited;
+	
 	// Constructor
 	public Node(int row, int col) {
 		this.row = row;
@@ -41,6 +48,8 @@ public class Node {
 		parent = new HashMap<Monster, Node>();
 		visited = new HashMap<Monster,Boolean>();
 		bombVisited = new HashMap<Bomb,Boolean>();
+		clueParent = new HashMap<Clue,Node>();
+		clueVisited = new HashMap<Clue,Boolean>();
 	}
 	
 	// get child nodes
@@ -205,8 +214,31 @@ public class Node {
 		double y2 = goal.getRow();
 		return (int) Math.sqrt(Math.pow((x2 - x1), 2) + Math.pow((y2 - y1), 2));
 	}
+
+	public int getPathCost() {
+		return pathCost;
+	}
+
+	public void setPathCost(int pathCost) {
+		this.pathCost = pathCost;
+	}
+
+	public boolean isVisited(Clue current) {
+		boolean visited = false;
+		if (this.clueVisited.containsKey(current))
+			visited = this.clueVisited.get(current);
+		return visited;
+	}
+
+	public void setVisited(Clue current, boolean visited) {
+		this.clueVisited.put(current, visited);
+	}
 	
-	//public void clearVisited(){
-	//	this.visited.clear();
-	//}
+	public Node getParent(Clue me) {
+		return this.clueParent.get(me);
+	}
+	public void setParent(Clue me, Node parent) {
+		this.clueParent.put(me, parent);
+	}
+	
 }

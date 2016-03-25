@@ -7,8 +7,10 @@ import ie.gmit.sw.ai.Game;
 import ie.gmit.sw.ai.jfuzzy.Fight;
 import ie.gmit.sw.ai.node.Node;
 import ie.gmit.sw.ai.node.items.Bomb;
+import ie.gmit.sw.ai.node.items.Clue;
 import ie.gmit.sw.ai.node.items.Item;
 import ie.gmit.sw.ai.node.items.bomb.Explosion;
+import ie.gmit.sw.ai.node.items.clue.Path;
 import ie.gmit.sw.resources.Resources;
 
 public class Player {
@@ -234,16 +236,23 @@ public class Player {
 		 *  if the bomb is selected
 		 *  we can plant it
 		 */
-		if (this.items.get(this.currentItem) instanceof Bomb){
-			System.out.println("Bomb planted");
-			Bomb bomb = (Bomb)this.items.get(this.currentItem);			
-			
-			
-			new Thread(new Explosion(maze, bomb, current)).start();
-			
-			
-			// this just removes the bomb after it was used
-			getItemPower();
+		if (this.items.size() > 0){
+			if (this.items.get(this.currentItem) instanceof Bomb){
+				System.out.println("Bomb planted");
+				Bomb bomb = (Bomb)this.items.get(this.currentItem);			
+				
+				new Thread(new Explosion(maze, bomb, current)).start();
+				
+				// this just removes the bomb after it was used
+				getItemPower();
+			} else if (this.items.get(this.currentItem) instanceof Clue){
+				System.out.println("Show clue");
+				
+				Clue clue = (Clue)this.items.get(this.currentItem);
+				
+				new Thread(new Path(maze,current,game.getGoal(),clue)).start();
+				getItemPower();
+			}
 		}
 	}
 

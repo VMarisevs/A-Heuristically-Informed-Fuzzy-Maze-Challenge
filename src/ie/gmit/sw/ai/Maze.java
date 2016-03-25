@@ -17,7 +17,6 @@ public class Maze {
 		buildMaze();
 		
 		spawnItems((int)((rows * cols) * 0.02));
-		generateExit(1);
 	}
 	
 	private void spawnItems(int count){
@@ -59,20 +58,24 @@ public class Maze {
 		}
 	}
 	
-	private void generateExit(int count){
+	public Node generateExit(){
 		Random generator = new Random();
 		
-		int counter = 0;
+		boolean spawned = false;
 		
-		while (counter < count){
+		while (!spawned){
 			int row = generator.nextInt(maze.length/2) + maze.length/2;
 			int col = generator.nextInt(maze[0].length/2) + maze[0].length/2;
 			
 			if (maze[row][col].isEmpty()){
-				maze[row][col].setExit(true);;
-				counter++;
+				maze[row][col].setExit(true);
+				spawned = true;
+				
+				return maze[row][col];
 			}
 		}
+		
+		return null;
 	}
 	
 	private void init(){

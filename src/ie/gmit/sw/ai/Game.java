@@ -11,13 +11,17 @@ import ie.gmit.sw.ai.node.characters.*;
 public class Game implements KeyListener{
 	private Node[][] maze;
 	private Player player;
+	private Node goal;
 	private MazeView mazeview;
 	private boolean gameOver = false;
 	private Monster[] monsters = new Monster[3];
 	
 	public Game(int rows, int cols){
 		
-		maze = new Maze(rows, cols).getMaze();
+		Maze mz = new Maze(rows, cols);
+		maze = mz.getMaze();
+		
+		goal = mz.generateExit();
 		
 		// set player node at position 0,0
 		player = new Player(this);
@@ -56,6 +60,14 @@ public class Game implements KeyListener{
 		return maze;
 	}
 	
+	
+	public Node getGoal() {
+		return goal;
+	}
+
+	public void setGoal(Node goal) {
+		this.goal = goal;
+	}
 
 	public void setGameOver(boolean gameOver) {
 		this.gameOver = gameOver;
