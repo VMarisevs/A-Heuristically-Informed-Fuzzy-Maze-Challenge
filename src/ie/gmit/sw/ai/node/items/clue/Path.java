@@ -12,7 +12,7 @@ public class Path implements Runnable {
 	private Clue clue;
 	private Node goal;
 	
-	private static final int STEPS_TO_SHOW = 5;
+	private static final int STEPS_TO_SHOW = 15;
 	
 	public Path(Node[][] maze, Node start, Node goal, Clue clue) {
 		this.maze = maze;

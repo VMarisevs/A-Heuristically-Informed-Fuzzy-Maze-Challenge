@@ -6,6 +6,6 @@ public class Runner {
 	
 	
 	public static void main(String[] args) {
-		new Game(30, 30);
+		new Game(60, 60);
 	}
 }

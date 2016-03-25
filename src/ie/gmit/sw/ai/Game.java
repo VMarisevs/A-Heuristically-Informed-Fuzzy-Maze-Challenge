@@ -14,7 +14,7 @@ public class Game implements KeyListener{
 	private Node goal;
 	private MazeView mazeview;
 	private boolean gameOver = false;
-	private Monster[] monsters = new Monster[3];
+	private Monster[] monsters = new Monster[5];
 	
 	public Game(int rows, int cols){
 		
@@ -30,13 +30,30 @@ public class Game implements KeyListener{
 		displayMaze();
 		
 		// spawn a monster
-		for (int i = 0; i < monsters.length; i++){
-			monsters[i] = new Monster(maze, player, mazeview);
-			new Thread(monsters[i]).start();
-		}
+		spawnMonster();
 		
 	}
 
+	private void spawnMonster(){
+		for (int i = 0; i < monsters.length; i++){
+			if (monsters[i] == null){
+				monsters[i] = new Monster(maze, player, this);
+				new Thread(monsters[i]).start();
+			}
+				
+		}
+	}
+	
+	public void spawnMonster(Monster monster){
+		for (int i = 0; i < monsters.length; i++){
+			if (monsters[i] == monster){
+				monsters[i] = new Monster(maze, player, this);
+				new Thread(monsters[i]).start();
+			}
+				
+		}
+	}
+	
 	private void displayMaze(){
 		// display maze
 		mazeview = new MazeView(maze, player);

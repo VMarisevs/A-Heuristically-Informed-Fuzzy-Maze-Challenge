@@ -132,7 +132,7 @@ public class Maze {
 				maze[i][j].setVisited(me, false);
 			}
 		}
-		System.out.println("Nodes explored: " + explored);
+		System.out.println("Monster id:" + me.hashCode() + " nodes explored: " + explored);
 	}
 
 }

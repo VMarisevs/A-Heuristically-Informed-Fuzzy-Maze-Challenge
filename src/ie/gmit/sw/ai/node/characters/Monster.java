@@ -1,10 +1,11 @@
 package ie.gmit.sw.ai.node.characters;
 
-import java.awt.Component;
 import java.awt.image.BufferedImage;
 import java.util.Random;
 
+import ie.gmit.sw.ai.Game;
 import ie.gmit.sw.ai.Maze;
+import ie.gmit.sw.ai.UpdateView;
 import ie.gmit.sw.ai.node.Node;
 import ie.gmit.sw.ai.node.characters.traversers.*;
 import ie.gmit.sw.resources.Resources;
@@ -14,6 +15,7 @@ public class Monster implements Runnable {
 	private Node[][] maze; // knowledge of maze
 	private Node current;
 	private Player player; // knowledge about player position
+	private Game game;
 	
 	private boolean alive = true;
 	private boolean pause = false;
@@ -21,14 +23,12 @@ public class Monster implements Runnable {
 	
 	private boolean previousstep = false;
 	
-	private Component view;
 	private BufferedImage image;
 	
-	public Monster(Node[][] maze,Player player, Component view) {
+	public Monster(Node[][] maze,Player player, Game game) {
 		this.maze = maze;
-		this.view = view;
 		this.player = player;
-		
+		this.game = game;
 		this.strength = new Random().nextInt(11); // randomly apply strength
 		setMonster();
 	}
@@ -172,7 +172,7 @@ public class Monster implements Runnable {
 					
 				}
 				
-				view.repaint();
+				UpdateView.getInstance().repaint();
 			}
 				
 			try {
@@ -184,6 +184,8 @@ public class Monster implements Runnable {
 		// kill thread if fight is won
 		System.out.println("Monster poisoned...");
 		current.setMonster(null);
+		
+		game.spawnMonster(this);
 	}
 	
 	private void makeMove(Node next){

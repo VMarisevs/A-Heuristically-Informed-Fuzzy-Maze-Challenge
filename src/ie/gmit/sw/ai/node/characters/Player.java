@@ -143,7 +143,7 @@ public class Player {
 				}
 				
 				if (next.isExit()){
-					System.out.println("Well done!");
+					System.out.println("--> Well done! <--");
 					game.setGameOver(true);
 				}
 
@@ -170,7 +170,8 @@ public class Player {
 		
 		double victory = fight.getVictory(monster.getStrength(), getItemPower(), health);
 		
-		health = (int) (health * victory);
+		setHealth((int) (health * victory));
+		
 		return true;
 	}
 	
@@ -225,6 +226,10 @@ public class Player {
 
 	public void setHealth(int health) {
 		this.health = health;
+		if (this.health <= 0){
+			game.setGameOver(true);
+			System.out.println("--> GAME OVER <--");
+		}
 	}
 	
 	public Node getPosition(){

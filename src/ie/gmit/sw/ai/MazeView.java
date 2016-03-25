@@ -138,7 +138,7 @@ public class MazeView extends JPanel {
 		DepthLimitedDFSRadar dfs = DepthLimitedDFSRadar.getInstance(maze);
 		Node[] lifeDetected = dfs.getLifeForms(player.getPosition());
 		
-		int size = 10;
+		int size = 4;
 		for (int i = 0; i < maze.length; i++){
 			for (int j = 0; j < maze[i].length; j++){
 				int x = i * size + DEFAULT_MAZE_SIZE;
