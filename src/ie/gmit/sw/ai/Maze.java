@@ -5,6 +5,7 @@ import java.util.Random;
 import ie.gmit.sw.ai.node.Node;
 import ie.gmit.sw.ai.node.characters.Monster;
 import ie.gmit.sw.ai.node.items.*;
+import ie.gmit.sw.resources.Resources;
 
 public class Maze {
 
@@ -69,6 +70,7 @@ public class Maze {
 			
 			if (maze[row][col].isEmpty()){
 				maze[row][col].setExit(true);
+				maze[row][col].setImage(Resources.getInstance().getExit());
 				spawned = true;
 				
 				return maze[row][col];
