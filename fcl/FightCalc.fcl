@@ -33,9 +33,9 @@ FUNCTION_BLOCK Fight
 	END_FUZZIFY
 
 	DEFUZZIFY victory
-		TERM poor := (0,1) (0.2,1) (0.3,0);
-		TERM good := (0.3,0) (0.5,1) (0.6,0);
-		TERM excellent := (0.6,0) (0.8,1) (1,1);
+		TERM poor := (0,1) (0.35,1) (0.7,0);
+		TERM good := (0.7,0) (0.8,1) (0.9,0);
+		TERM excellent := (0.9,0) (0.95,1) (1,1);
 		METHOD : COG;		// Use 'Center Of Gravity' defuzzification method
 		DEFAULT := 0;		// Default value is 0 (if no rule activates defuzzifier)
 	END_DEFUZZIFY
@@ -69,6 +69,14 @@ FUNCTION_BLOCK Fight
 		HI					HI				ALIVE
 */
 
+	RULEBLOCK No1
+		RULE 1 : IF monster_strength IS low OR weapon_power IS high THEN victory IS excellent;
+		RULE 2 : IF monster_strength IS average AND weapon_power IS low THEN victory IS poor;
+		RULE 3 : IF monster_strength IS average AND weapon_power IS average THEN victory IS good;
+		RULE 4 : IF monster_strength IS high AND weapon_power IS NOT high THEN victory IS poor;
+	END_RULEBLOCK
+		
+/*
 	RULEBLOCK No1
 		RULE 1 : IF monster_strength IS low AND weapon_power IS none AND life_force IS dead THEN victory IS poor;
 		RULE 2 : IF monster_strength IS low AND weapon_power IS none AND life_force IS alive THEN victory IS poor;
@@ -109,5 +117,5 @@ FUNCTION_BLOCK Fight
 		RULE 24: IF monster_strength IS high AND weapon_power IS high AND life_force IS alive THEN victory IS excellent;
 	
 	END_RULEBLOCK
-	
+*/	
 END_FUNCTION_BLOCK

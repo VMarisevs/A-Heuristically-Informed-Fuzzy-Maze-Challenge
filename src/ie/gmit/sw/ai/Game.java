@@ -14,6 +14,7 @@ public class Game implements KeyListener{
 	private Node goal;
 	private MazeView mazeview;
 	private boolean gameOver = false;
+	private boolean pause = false;
 	private Monster[] monsters = new Monster[5];
 	
 	public Game(int rows, int cols){
@@ -78,6 +79,12 @@ public class Game implements KeyListener{
 	}
 	
 	
+	
+	
+	public boolean isPause() {
+		return pause;
+	}
+
 	public Node getGoal() {
 		return goal;
 	}
@@ -144,6 +151,12 @@ public class Game implements KeyListener{
 					break;
 				case KeyEvent.VK_E:
 					player.plantBomb();
+					break;
+				case KeyEvent.VK_P:
+					if (this.pause)
+						this.pause = false;
+					else
+						this.pause = true;
 					break;
 			}
 		mazeview.repaint();

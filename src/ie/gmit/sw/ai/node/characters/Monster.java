@@ -77,7 +77,7 @@ public class Monster implements Runnable {
 	private void move(){
 		while(alive){
 			
-			if (!pause){				
+			if (!pause && !game.isPause()){				
 				boolean moved = false;
 					
 				while(!moved){
