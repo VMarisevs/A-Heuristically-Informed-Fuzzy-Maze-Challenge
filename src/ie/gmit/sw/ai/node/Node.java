@@ -25,31 +25,22 @@ public class Node {
 	private int col = -1;
 	
 	// for traversator
-	private Map<Monster, Node> parent;
-	private Map<Monster, Boolean> visited;
+	private Map<Object, Node> parent;
+	private Map<Object, Boolean> visited;
 	
 	// for radar
 	private boolean radarVisited;
 	
-	// for bomb
-	private Map<Bomb, Boolean> bombVisited;
-	
 	// for path helper
 	private int pathCost;
-	
-	private Map<Clue, Node> clueParent;
-	private Map<Clue, Boolean> clueVisited;
-	
+
 	// Constructor
 	public Node(int row, int col) {
 		this.row = row;
 		this.col = col;
 		
-		parent = new HashMap<Monster, Node>();
-		visited = new HashMap<Monster,Boolean>();
-		bombVisited = new HashMap<Bomb,Boolean>();
-		clueParent = new HashMap<Clue,Node>();
-		clueVisited = new HashMap<Clue,Boolean>();
+		parent = new HashMap<Object, Node>();
+		visited = new HashMap<Object,Boolean>();
 	}
 	
 	// get child nodes
@@ -108,32 +99,21 @@ public class Node {
 		this.item = item;
 	}
 
-	public boolean isVisited(Monster me) {
+	public boolean isVisited(Object me) {
 		boolean visited = false;
 		if (this.visited.containsKey(me))
 			visited = this.visited.get(me);
 		return visited;
 	}
 
-	public void setVisited(Monster me, boolean visited){
+	public void setVisited(Object me, boolean visited){
 		this.visited.put(me, visited);
 	}
-	
-	public boolean isVisited(Bomb current){
-		boolean visited = false;
-		if (this.bombVisited.containsKey(current))
-			visited = this.bombVisited.get(current);
-		return visited;
-	}
-	
-	public void setVisited(Bomb current, boolean visited){
-		this.bombVisited.put(current, visited);
-	}
-	
-	public Node getParent(Monster me) {
+
+	public Node getParent(Object me) {
 		return this.parent.get(me);
 	}
-	public void setParent(Monster me, Node parent) {
+	public void setParent(Object me, Node parent) {
 		this.parent.put(me, parent);
 	}
 	
@@ -223,22 +203,4 @@ public class Node {
 		this.pathCost = pathCost;
 	}
 
-	public boolean isVisited(Clue current) {
-		boolean visited = false;
-		if (this.clueVisited.containsKey(current))
-			visited = this.clueVisited.get(current);
-		return visited;
-	}
-
-	public void setVisited(Clue current, boolean visited) {
-		this.clueVisited.put(current, visited);
-	}
-	
-	public Node getParent(Clue me) {
-		return this.clueParent.get(me);
-	}
-	public void setParent(Clue me, Node parent) {
-		this.clueParent.put(me, parent);
-	}
-	
 }
